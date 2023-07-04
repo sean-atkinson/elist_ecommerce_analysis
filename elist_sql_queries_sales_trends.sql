@@ -7,10 +7,10 @@ with sales_trends_monthly_cte as (
     count(orders.id) as total_orders,
     round(sum(orders.usd_price),2) as total_sales,
     round(avg(orders.usd_price), 2) as avg_sales
-  from elist.orders as orders
-  join elist.customers as customers
+  from elist.orders orders
+  join elist.customers customers
     on orders.customer_id = customers.id
-  join elist.geo_lookup as geo_lookup
+  join elist.geo_lookup geo_lookup
     on customers.country_code = geo_lookup.country
   where region = 'NA' and lower(orders.product_name) like '%macbook%'
   group by 1,2)
@@ -30,14 +30,13 @@ with sales_trends_quarterly_cte as (
     count(orders.id) as total_orders,
     round(sum(orders.usd_price),2) as total_sales,
     round(avg(orders.usd_price), 2) as avg_sales
-  from elist.orders as orders
-  join elist.customers as customers
+  from elist.orders orders
+  join elist.customers customers
     on orders.customer_id = customers.id
-  join elist.geo_lookup as geo_lookup
+  join elist.geo_lookup geo_lookup
     on customers.country_code = geo_lookup.country
   where region = 'NA' and lower(orders.product_name) like '%macbook%'
   group by 1,2)
-
 ---quarterly trends across all years
 select round(avg(total_orders)) as avg_total_orders,
   round(avg(total_sales)) as avg_quarterly_sales,
@@ -50,7 +49,7 @@ with monthly_refunds_cte as (
   select date_trunc(purchase_ts, month) as month,
     sum(case when refund_ts is not null then 1 else 0 end) as refunds,
     sum(case when refund_ts is not null then 1 else 0 end)/count(distinct order_id) as refund_rate
-from `elist-390902.elist.order_status` order_status
+from elist.order_status order_status
 group by 1
 order by 1)
 --calculating the monthly refund rate for 2020
@@ -62,8 +61,8 @@ where extract(year from month) = 2020;
 --filtering for 2021 and products with apple in their name
 select date_trunc(order_status.refund_ts, month) as month,
     sum(case when order_status.refund_ts is not null then 1 else 0 end) as refunds,
-from `elist-390902.elist.order_status` order_status
-join `elist-390902.elist.orders` orders
+from elist.order_status order_status
+join elist.orders orders
     on order_status.order_id = orders.id
 where extract(year from order_status.refund_ts) = 2021
     and lower(orders.product_name) like '%apple%'
