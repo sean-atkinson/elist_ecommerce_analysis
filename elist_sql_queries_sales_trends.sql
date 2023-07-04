@@ -98,3 +98,32 @@ select product_name_clean, refunds
 from refunds_cte
 order by 2 desc
 limit 3;
+
+--finding aov and new customers by account_creation_method for accounts created in the first 2 months of 2022 
+with account_creation_method_cte as (
+  select customers.account_creation_method as account_creation_method, 
+    round(avg(usd_price),2) as aov, 
+    count(distinct customers.id) as new_customers
+  from `elist-390902.elist.customers` customers
+  join `elist-390902.elist.orders` orders 
+    on customers.id = orders.customer_id
+  where extract(year from customers.created_on) = 2022 and extract(month from customers.created_on) in (1,2)
+  group by 1)
+--aov
+select account_creation_method, aov
+from account_creation_method_cte
+order by 2 desc;
+
+with account_creation_method_cte as (
+  select customers.account_creation_method as account_creation_method, 
+    round(avg(usd_price),2) as aov, 
+    count(distinct customers.id) as new_customers
+  from `elist-390902.elist.customers` customers
+  join `elist-390902.elist.orders` orders 
+    on customers.id = orders.customer_id
+  where extract(year from customers.created_on) = 2022 and extract(month from customers.created_on) in (1,2)
+  group by 1)
+--total new customers
+select account_creation_method, new_customers
+from account_creation_method_cte
+order by 2 desc;
