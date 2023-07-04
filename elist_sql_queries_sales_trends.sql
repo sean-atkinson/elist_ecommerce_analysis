@@ -127,3 +127,29 @@ with account_creation_method_cte as (
 select account_creation_method, new_customers
 from account_creation_method_cte
 order by 2 desc;
+
+--avg amount of time between customer registration and initial purchase
+--averaging the amount of days to purchase for all customers
+with initial_order_cte as (
+	select orders.customer_id as customer_id, min(purchase_ts) as initial_order
+	from `elist-390902.elist.orders` orders
+	group by 1 
+)
+select round(avg(date_diff(initial_order_cte.initial_order, customers.created_on, day)),2) as days_to_purchase
+from `elist-390902.elist.customers` customers
+join initial_order_cte
+	on customers.id = initial_order_cte.customer_id
+
+--avg time between customer registration and all orders made by customers
+--averaging the amount of days to purchase for all customers
+with time_to_order_cte as (
+	select orders.customer_id, 
+		orders.purchase_ts,
+		customers.created_on,
+		date_diff(orders.purchase_ts, customers.created_on, day) as days_to_purchase
+	from `elist-390902.elist.customers` customers
+	left join `elist-390902.elist.orders` orders
+		on customers.id = orders.customer_id
+		)
+select round(avg(days_to_purchase),1) as avg_days_to_purchase
+from time_to_order_cte
