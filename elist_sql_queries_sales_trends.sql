@@ -79,7 +79,7 @@ with refunds_cte as (
     left join elist.order_status order_status
         on orders.id = order_status.order_id
     group by 1)
---highlighing the 3 products with the highest refund rate
+--highlighting the 3 products with the highest refund rate
 select product_name_clean, refund_rate
 from refunds_cte
 order by 2 desc
@@ -104,8 +104,8 @@ with account_creation_method_cte as (
   select customers.account_creation_method as account_creation_method, 
     round(avg(usd_price),2) as aov, 
     count(distinct customers.id) as new_customers
-  from `elist-390902.elist.customers` customers
-  join `elist-390902.elist.orders` orders 
+  from elist.customers customers
+  join elist.orders orders 
     on customers.id = orders.customer_id
   where extract(year from customers.created_on) = 2022 and extract(month from customers.created_on) in (1,2)
   group by 1)
@@ -118,8 +118,8 @@ with account_creation_method_cte as (
   select customers.account_creation_method as account_creation_method, 
     round(avg(usd_price),2) as aov, 
     count(distinct customers.id) as new_customers
-  from `elist-390902.elist.customers` customers
-  join `elist-390902.elist.orders` orders 
+  from elist.customers customers
+  join elist.orders orders 
     on customers.id = orders.customer_id
   where extract(year from customers.created_on) = 2022 and extract(month from customers.created_on) in (1,2)
   group by 1)
@@ -132,11 +132,11 @@ order by 2 desc;
 --averaging the amount of days to purchase for all customers
 with initial_order_cte as (
 	select orders.customer_id as customer_id, min(purchase_ts) as initial_order
-	from `elist-390902.elist.orders` orders
+	from elist.orders orders
 	group by 1 
 )
 select round(avg(date_diff(initial_order_cte.initial_order, customers.created_on, day)),2) as days_to_purchase
-from `elist-390902.elist.customers` customers
+from elist.customers customers
 join initial_order_cte
 	on customers.id = initial_order_cte.customer_id
 
@@ -147,8 +147,8 @@ with time_to_order_cte as (
 		orders.purchase_ts,
 		customers.created_on,
 		date_diff(orders.purchase_ts, customers.created_on, day) as days_to_purchase
-	from `elist-390902.elist.customers` customers
-	left join `elist-390902.elist.orders` orders
+	from elist.customers customers
+	left join elist.orders orders
 		on customers.id = orders.customer_id
 		)
 select round(avg(days_to_purchase),1) as avg_days_to_purchase
