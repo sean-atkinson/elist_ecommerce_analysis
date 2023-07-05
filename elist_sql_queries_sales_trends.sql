@@ -2,7 +2,7 @@
 --filtering to only north america and macbooks
 --rounding numbers for readability
 with sales_trends_monthly_cte as (
-  select date_trunc(orders.purchase_ts, month) as purchase_quarter,
+  select date_trunc(orders.purchase_ts, month) as purchase_month,
     geo_lookup.region as region,
     count(orders.id) as total_orders,
     round(sum(orders.usd_price),2) as total_sales,
@@ -14,7 +14,6 @@ with sales_trends_monthly_cte as (
     on customers.country_code = geo_lookup.country
   where region = 'NA' and lower(orders.product_name) like '%macbook%'
   group by 1,2)
-
 ---monthly trends across all years
 select round(avg(total_orders)) as avg_total_orders,
   round(avg(total_sales)) as avg_monthly_sales,
