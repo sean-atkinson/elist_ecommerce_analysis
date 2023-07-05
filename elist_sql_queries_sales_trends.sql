@@ -262,8 +262,8 @@ with highest_num_refunds_cte as (
         end as brand,
         date_trunc(order_status.refund_ts, month) as month,
         count(order_status.refund_ts) as num_refunds
-  from `elist-390902.elist.orders` orders 
-  join `elist-390902.elist.order_status` order_status 
+  from elist.orders orders 
+  join elist.order_status order_status 
     on orders.id = order_status.order_id
   where extract(year from order_status.refund_ts) = 2020
   group by 1,2)
