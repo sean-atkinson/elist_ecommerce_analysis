@@ -227,3 +227,24 @@ select region, marketing_channel, total_orders
 from top_marketing_channel_cte
 where total_orders_rank = 1
 order by 3 desc;
+
+--looking for customers with more than 4 purchases
+with loyal_customers_cte as (
+  select orders.customer_id as customer_id, 
+  count(distinct orders.id) as total_orders
+from elist.orders orders 
+group by 1
+having count(distinct orders.id) > 4
+)
+--to see the most recent order of loyal customers, do a join with loyal_customers_cte
+--ranking their orders by most recent first
+--qualify statement allows us to limit results to their most recent order
+select orders.customer_id as customer_id, 
+  orders.id as order_id, 
+  orders.product_name as product_name, 
+  date(orders.purchase_ts) as purchase_date,
+  row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) as rank
+from `elist-390902.elist.orders` orders
+join loyal_customers_cte loyal_customers
+on orders.customer_id = loyal_customers.customer_id
+qualify row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) = 1
