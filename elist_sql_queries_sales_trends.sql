@@ -165,10 +165,10 @@ with top_marketing_channel_cte as (
     row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
     row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
     row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
-  from `elist-390902.elist.customers` customers
-  join `elist-390902.elist.orders` orders 
+  from elist.customers customers
+  join elist.orders orders 
     on customers.id = orders.customer_id
-  join `elist-390902.elist.geo_lookup` geo_lookup 
+  join elist.geo_lookup geo_lookup 
     on customers.country_code = geo_lookup.country
   group by 1, 2
   )
@@ -190,10 +190,10 @@ with top_marketing_channel_cte as (
     row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
     row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
     row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
-  from `elist-390902.elist.customers` customers
-  join `elist-390902.elist.orders` orders 
+  from elist.customers customers
+  join elist.orders orders 
     on customers.id = orders.customer_id
-  join `elist-390902.elist.geo_lookup` geo_lookup 
+  join elist.geo_lookup geo_lookup 
     on customers.country_code = geo_lookup.country
   group by 1, 2
   )
@@ -214,10 +214,10 @@ with top_marketing_channel_cte as (
     row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
     row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
     row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
-  from `elist-390902.elist.customers` customers
-  join `elist-390902.elist.orders` orders 
+  from elist.customers customers
+  join elist.orders orders 
     on customers.id = orders.customer_id
-  join `elist-390902.elist.geo_lookup` geo_lookup 
+  join elist.geo_lookup geo_lookup 
     on customers.country_code = geo_lookup.country
   group by 1, 2
   )
@@ -244,7 +244,7 @@ select orders.customer_id as customer_id,
   orders.product_name as product_name, 
   date(orders.purchase_ts) as purchase_date,
   row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) as rank
-from `elist-390902.elist.orders` orders
+from elist.orders orders
 join loyal_customers_cte loyal_customers
 on orders.customer_id = loyal_customers.customer_id
 qualify row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) = 1
