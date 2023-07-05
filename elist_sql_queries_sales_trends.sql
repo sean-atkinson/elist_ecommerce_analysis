@@ -60,11 +60,12 @@ where extract(year from month) = 2020;
 --filtering for 2021 and products with apple in their name
 select date_trunc(order_status.refund_ts, month) as month,
     sum(case when order_status.refund_ts is not null then 1 else 0 end) as refunds,
-from elist.order_status order_status
-join elist.orders orders
+from `elist-390902.elist.order_status` order_status
+join `elist-390902.elist.orders` orders
     on order_status.order_id = orders.id
 where extract(year from order_status.refund_ts) = 2021
-    and lower(orders.product_name) like '%apple%'
+    and (lower(orders.product_name) like '%apple%' or
+    	lower(orders.product_name) like '%macbook%')
 group by 1
 order by 1;
 
