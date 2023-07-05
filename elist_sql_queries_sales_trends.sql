@@ -153,3 +153,77 @@ with time_to_order_cte as (
 		)
 select round(avg(days_to_purchase),1) as avg_days_to_purchase
 from time_to_order_cte
+
+--calculating total sales, aov, and total orders per region to determine which marketing channel performs best
+--ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
+with top_marketing_channel_cte as (
+  select geo_lookup.region as region,
+    customers.marketing_channel as marketing_channel, 
+    round(sum(orders.usd_price),2) as total_sales,
+    round(avg(orders.usd_price),2) as aov,
+    count(distinct orders.id) as total_orders,
+    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
+    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
+    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
+  from `elist-390902.elist.customers` customers
+  join `elist-390902.elist.orders` orders 
+    on customers.id = orders.customer_id
+  join `elist-390902.elist.geo_lookup` geo_lookup 
+    on customers.country_code = geo_lookup.country
+  group by 1, 2
+  )
+--finding out which marketing channel performs best in terms of total sales
+--note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+select region, marketing_channel, total_sales 
+from top_marketing_channel_cte
+where total_sales_rank = 1
+order by 3 desc;
+
+--calculating total sales, aov, and total orders per region to determine which marketing channel performs best
+--ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
+with top_marketing_channel_cte as (
+  select geo_lookup.region as region,
+    customers.marketing_channel as marketing_channel, 
+    round(sum(orders.usd_price),2) as total_sales,
+    round(avg(orders.usd_price),2) as aov,
+    count(distinct orders.id) as total_orders,
+    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
+    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
+    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
+  from `elist-390902.elist.customers` customers
+  join `elist-390902.elist.orders` orders 
+    on customers.id = orders.customer_id
+  join `elist-390902.elist.geo_lookup` geo_lookup 
+    on customers.country_code = geo_lookup.country
+  group by 1, 2
+  )
+--finding out which marketing channel performs best in terms of aov
+select region, marketing_channel, aov 
+from top_marketing_channel_cte
+where aov_rank = 1
+order by 3 desc;
+
+--calculating total sales, aov, and total orders per region to determine which marketing channel performs best
+--ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
+with top_marketing_channel_cte as (
+  select geo_lookup.region as region,
+    customers.marketing_channel as marketing_channel, 
+    round(sum(orders.usd_price),2) as total_sales,
+    round(avg(orders.usd_price),2) as aov,
+    count(distinct orders.id) as total_orders,
+    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
+    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
+    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
+  from `elist-390902.elist.customers` customers
+  join `elist-390902.elist.orders` orders 
+    on customers.id = orders.customer_id
+  join `elist-390902.elist.geo_lookup` geo_lookup 
+    on customers.country_code = geo_lookup.country
+  group by 1, 2
+  )
+--finding which marketing channel performs best in terms of total orders
+--note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+select region, marketing_channel, total_orders  
+from top_marketing_channel_cte
+where total_orders_rank = 1
+order by 3 desc;
