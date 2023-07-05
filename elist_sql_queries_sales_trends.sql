@@ -248,3 +248,29 @@ from elist.orders orders
 join loyal_customers_cte loyal_customers
 on orders.customer_id = loyal_customers.customer_id
 qualify row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) = 1
+
+
+--creating a brand category and totalling the amount of refunds per month
+--filtering to the year 2020
+with highest_num_refunds_cte as (
+  select case
+          when lower(orders.product_name) like '%apple%' or lower(orders.product_name) like '%macbook%' then 'Apple'
+          when lower(orders.product_name) like '%samsung%' then 'Samsung'
+          when lower(orders.product_name) like '%thinkpad%' then 'ThinkPad'
+          when lower(orders.product_name) like '%bose%' then 'Bose'
+          else 'Unknown'
+        end as brand,
+        date_trunc(order_status.refund_ts, month) as month,
+        count(order_status.refund_ts) as num_refunds
+  from `elist-390902.elist.orders` orders 
+  join `elist-390902.elist.order_status` order_status 
+    on orders.id = order_status.order_id
+  where extract(year from order_status.refund_ts) = 2020
+  group by 1,2)
+--getting the high month and corresponding number of refunds for each brand in 2020 
+select brand, 
+  month, 
+  num_refunds
+from highest_num_refunds_cte
+qualify row_number() over (partition by brand order by num_refunds desc) = 1
+order by 1
