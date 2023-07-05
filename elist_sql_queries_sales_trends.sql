@@ -17,7 +17,7 @@ with sales_trends_monthly_cte as (
 
 ---monthly trends across all years
 select round(avg(total_orders)) as avg_total_orders,
-  round(avg(total_sales)) as avg_quarterly_sales,
+  round(avg(total_sales)) as avg_monthly_sales,
   round(avg(avg_sales)) as avg_price
 from sales_trends_monthly_cte;
 
