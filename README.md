@@ -112,7 +112,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 - While all products saw their total orders peak around the start of the pandemic, webcams didn’t. The rise in orders for webcams in the following years is something that needs to be looked at in further detail.
 
 <b>Shipping times</b>
-- iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One wonders though if this is a chicken and egg situation when taking their sales into account. Are the shipping times for iPhones and Bose headphones all over the place because this is an item Elist rarely sells, and thus doesn’t have much stock on hand or does Elist not sell many of these products because their shipping is so unreliable?  
+- iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One wonders though if this is a chicken and egg situation when taking their sales into account. Are the shipping times for iPhones and Bose headphones all over the place because this is an item Elist rarely sells, and thus doesn’t have much stock on hand, or does Elist not sell many of these products because their shipping is so unreliable?  
 
 <b>Sales</b>
 - From 2019-2022, gaming monitors have consistently brought in the most in terms of total sales (outside of a small period at the end of 2020).
