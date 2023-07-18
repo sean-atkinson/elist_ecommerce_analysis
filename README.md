@@ -134,4 +134,4 @@ The interactive version of the above Tableau dashboard can be found [here](https
 [(Back to table of contents)](#table_of_contents)<br><br>
 - Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits.
 - Since computer hardward represents such on outsized portion of total sales in terms of dollars, consider looking into what other computer hardware can be added to our product assortment.
-- Investigate why shipping time are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility comboined with poor sales numbers means its better to replace those products with something that speaks more to our target customers. 
+- Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means its better to replace those products with something that speaks more to our target customers. 
