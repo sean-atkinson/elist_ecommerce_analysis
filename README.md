@@ -28,7 +28,7 @@ This project has three parts:
 - <b>Part 3: Visualization</b>
   * A Tableau dashboard created for the finance and product teams (as well as sales and operations to a lesser extent) can monitor metrics of interest on an ongoing basis. 
 
-The data I'll be using is spread out across four tables and consists of information om orders, order statuses, customers, products, and geographic information.
+The data I'll be using is spread out across four tables and consists of information on orders, order statuses, customers, products, and geographic information.
 
 Here is its Entity Relationship Diagram:
 
