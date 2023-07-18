@@ -68,7 +68,7 @@ Here is an example of the pivot table used for seasonality insights:
 More detailed analysis can be found in <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx">this Excel workbook</a>.
 
 <a id='section_3'></a>
-# Part 2: Targeted Insights
+# Part 2: Targeted Insights (SQL)
 [(Back to table of contents)](#table_of_contents)<br><br>
 <b>Summary of Targeted Insights</b>:
 
@@ -102,7 +102,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 <img width="750" alt="image" src="https://imgur.com/qxHfD3n.png">
 
 <a id='section_4'></a>
-# Part 3: Visualization
+# Part 3: Visualization (Tableau)
 [(Back to table of contents)](#table_of_contents)<br><br>
 
 <b>Summary of Insights:</b>
