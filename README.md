@@ -59,7 +59,7 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 - We recommend that Elist continues to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase.<br>
 
 <b>Technical Analysis:</b><br>
-For this section I used Pivot Tables, conditional formatting, aggregation functions, and statistical analysis to clean, analyze, and summarize my insights for the finance and product teams.
+For this section, I used Pivot Tables, conditional formatting, aggregation functions, and statistical analysis to clean, analyze, and summarize my insights for the finance and product teams.
 
 Here is an example of the pivot table used for seasonality insights:
 
@@ -93,7 +93,7 @@ More detailed analysis can be found in <a href="https://github.com/sean-atkinson
 - Emails - second highest number of orders
 
 <b>Technical Analysis:</b><br>
-For this analysis I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, common table expressions (CTEs), and in a couple instances  the QUALIFY clause to use row_number() to filter results.
+For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, common table expressions (CTEs), and in a couple instances  the QUALIFY clause to use row_number() to filter results.
 
 You can find my SQL queries <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_sales_trends_queries.sql">here</a>.
 
@@ -120,7 +120,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 - Outside of Airpods, computer hardware is where Elist brings in the supermajority of its revenue.
 
 <b>Technical Analysis:</b><br>
-For this section I primarily used Tableau. SQL and BigQuery were also used to create a dataset for Tableau. My Tableau dashboard incorporates filters, tables, line graphs, and area charts.
+In this section, I primarily used Tableau. SQL and BigQuery were also used to create a dataset for Tableau. My Tableau dashboard incorporates filters, tables, line graphs, and area charts.
 
 You can find the SQL code for the dataset I created in BigQuery <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_dataset_tableau_query.sql">here</a>.
 
