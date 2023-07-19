@@ -57,7 +57,7 @@ from monthly_refunds_cte
 where extract(year from month) = 2020;
 
 --calcultating the number of refunds per month (non-null values in refund_ts represent refunds)
---filtering for 2021 and products with apple in their name
+--filtering for 2021 and apple products
 select date_trunc(order_status.refund_ts, month) as month,
     sum(case when order_status.refund_ts is not null then 1 else 0 end) as refunds,
 from `elist-390902.elist.order_status` order_status
