@@ -92,8 +92,8 @@ More detailed analysis can be found in <a href="https://github.com/sean-atkinson
 - Average of 51 days between account creation and first purchase.
 
 <b>Marketing channels (all years)</b>
-- Direct - highest number of orders
-- Emails - second highest number of orders
+- Direct - highest number of orders.
+- Emails - second highest number of orders.
 
 <b>Technical Analysis:</b><br>
 For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, common table expressions (CTEs), and in a couple instances  the QUALIFY clause to use row_number() to filter results.
