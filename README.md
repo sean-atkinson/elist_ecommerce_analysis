@@ -112,7 +112,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 
 <b>Orders</b>
 - Airpods, gaming monitors, and charging packs have accounted for over 80% of all orders from 2019-2022.
-- While all products saw their total orders peak around the start of the pandemic, webcams didn’t. The rise in orders for webcams in the following years is something that needs to be looked at in further detail.
+- Every product except webcames saw their total orders peak around the start of the pandemic. Paradoxically, total orders for webcams rose in the following years. This is something we might want to take a closer look at.
 
 <b>Shipping times</b>
 - iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One wonders though if this is a chicken and egg situation when taking their sales into account. Are the shipping times for iPhones and Bose headphones all over the place because we rarely sell them (and consequently don't have much stock on hand)? Or do we rarely sell iPhones and Bose headphones because customers find our shipping times to be too unpredictable?  
