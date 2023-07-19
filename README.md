@@ -26,11 +26,14 @@ This project has three parts:
   * With the aid of SQL, I pull out more targeted insights for the finance and marketing team, highlighting things like MacBook sales, refund rates, and best performing marketing channels.
 
 - <b>Part 3: Visualization</b>
-  * A Tableau dashboard created for the finance and product teams (as well as sales and operations to a lesser extent) can monitor metrics of interest on an ongoing basis. 
+  * A Tableau dashboard created for the finance and product teams (as well as sales and operations to a lesser extent) can monitor metrics of interest on an ongoing basis.
+
+- <b>Part 4: Recommendations & Next Steps</b>
+  * Suggestions on things to take a look at going forward.
 
 The data I'll be using is spread out across four tables and consists of information on orders, order statuses, customers, products, and geographic information.
 
-Here is its Entity Relationship Diagram:
+Here is the Entity Relationship Diagram:
 
 <img width="750" alt="image" src="https://imgur.com/DyKJM1G.png">
 
@@ -51,12 +54,12 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 - There's a noticeable sales uptick in the first half of 2020, most likely due to the pandemic.
 
 <b>Products</b>
-- Airpods have consistently been Elists’s best-selling product. 
-- In 2022, Airpods and a gaming monitor made up a whopping 68% of sales.
-- Bose Soundsport Headphones have consistently done poorly. Elist has only sold 25 pairs over 3 years.
+- Airpods have consistently been our best-selling product in terms of total orders. 
+- In 2022, Airpods and a gaming monitor made up a whopping 68% of all orders.
+- Bose Soundsport Headphones have consistently done poorly. We've only sold 25 pairs over 3 years.
 
 <b>Loyalty Program</b>
-- We recommend that Elist continues to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase.<br>
+- We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase.<br>
 
 <b>Technical Analysis:</b><br>
 For this section, I used Pivot Tables, conditional formatting, aggregation functions, and statistical analysis to clean, analyze, and summarize my insights for the finance and product teams.
@@ -65,7 +68,7 @@ Here is an example of the pivot table used for seasonality insights:
 
 <img width="750" alt="image" src="https://imgur.com/MUw8TKL.png">
 
-More detailed analysis can be found in <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx">this Excel workbook</a>.
+More detailed analysis can be found in <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx">this Excel workbook that you can download here</a>.
 
 <a id='section_3'></a>
 # Part 2: Targeted Insights (SQL)
@@ -112,12 +115,12 @@ Here is an example of one query result that used the aforementioned qualify clau
 - While all products saw their total orders peak around the start of the pandemic, webcams didn’t. The rise in orders for webcams in the following years is something that needs to be looked at in further detail.
 
 <b>Shipping times</b>
-- iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One wonders though if this is a chicken and egg situation when taking their sales into account. Are the shipping times for iPhones and Bose headphones all over the place because this is an item Elist rarely sells, and thus doesn’t have much stock on hand, or does Elist not sell many of these products because their shipping is so unreliable?  
+- iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One wonders though if this is a chicken and egg situation when taking their sales into account. Are the shipping times for iPhones and Bose headphones all over the place because we rarely sell them (and consequently don't have much stock on hand)? Or do we rarely sell iPhones and Bose headphones because customers find our shipping times to be too unpredictable?  
 
 <b>Sales</b>
 - From 2019-2022, gaming monitors have consistently brought in the most in terms of total sales (outside of a small period at the end of 2020).
 - Even though charging packs consistently make up 15-24% of all orders, they’ve never accounted for more than 3% of sales in terms of total dollar value.
-- Outside of Airpods, computer hardware is where Elist brings in the supermajority of its revenue.
+- Outside of Airpods, computer hardware is brings in the supermajority of our revenue.
 
 <b>Technical Analysis:</b><br>
 In this section, I primarily used Tableau. SQL and BigQuery were also used to create a dataset for Tableau. My Tableau dashboard incorporates filters, tables, line graphs, and area charts.
@@ -132,6 +135,6 @@ The interactive version of the above Tableau dashboard can be found [here](https
 <a id='section_5'></a>
 # Part 4: Recommendations & Next Steps
 [(Back to table of contents)](#table_of_contents)<br><br>
-- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits.
 - Since computer hardware represents such on outsized portion of total sales in terms of dollars, consider looking into if any additional computer hardware can be added to our product assortment.
-- Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means its better to replace those products with something that speaks more to our target customers. 
+- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights in the latter point can give us an idea of what products we might want to look into selling to turn around our declining sales.
+- Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means its better to replace those products with something that might appeal more to our most valuable customer segments. 
