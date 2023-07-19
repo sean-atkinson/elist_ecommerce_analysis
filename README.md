@@ -78,7 +78,7 @@ More detailed analysis can be found in <a href="https://github.com/sean-atkinson
 
 <b>Refund rates</b>
 - For 2020, the monthly refund rate was 3.1%.
-- In 2021, the lowest amount of returns for Apple products was 7 (in September). The highest was 30 (in March).
+- In 2021, the lowest amount of returns for Apple products was 6 (in November). The highest was 33 (in March).
 - Across all years, Macbook Airs had the highest refund rate at 4.2% followed by ThinkPads (3.8%) and iPhones (3.5%).
 
 <b>Account creation methods (Jan-Feb 2022)</b>
