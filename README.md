@@ -128,6 +128,7 @@ In this section, I primarily used Tableau. SQL and BigQuery were also used to cr
 You can find the SQL code for the dataset I created in BigQuery <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_dataset_tableau_query.sql">here</a>.
 
 Here is an overview of what the Tableau dashboard for this part of my analysis looks like:
+
 <img width="750" alt="image" src="https://imgur.com/DpPG33J.png">
 
 The interactive version of the above Tableau dashboard can be found [here](https://public.tableau.com/app/profile/sean.atkinson/viz/ElistOrdersDashboard_16896324404540/ordersdashboard).
