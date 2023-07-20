@@ -48,11 +48,8 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 - Interestingly, the first of the pandemic (2020) saw the highest average order value of $298.
 - Total orders are down to 19K in 2022 (from 31k in 2021).
 - Sales are down 44% year-over-year in 2022.
-- While the 2022 sales numbers are worrying, they seem to be a reflection of the e-commerce market as a whole. The recession, saturation of the e-commerce space, reduction in marketing campaign effectiveness and supply chain issues have all been <a href="https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate">highlighted by Statista</a> as reasons as to why e-commerce revenue was forecasted to shrink for the first time ever in 2022. With respect to marketing campaign effectiveness specifically, <a href="https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da">Apple's privacy update in iOS 14.5 and the 47% increase in Facebook advertising costs</a> seems to have hit e-commerce merchants especially hard.
+- The concerning sales numbers of 2022 appear to reflect broader trends in the e-commerce industry.Factors such as the economic recession, an oversaturated market, decreased effectiveness of marketing campaigns, and supply chain issues were <a href="https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate">identified by Statista</a> contributors to an unprecedented forecasted shrink in e-commerce revenue for 2022. Particularly notable were changes in digital marketing practices: <a href="https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da">the privacy update in Apple's iOS 14.5, alongside a 47% increase in Facebook advertising costs</a>, seems to have had a profound impact on e-commerce merchants.
 
-
-
-  
 <b>Seasonality</b>
 - Winter and spring tend to perform better, most likely due to holiday sales and special promotions.
 - There's a noticeable sales uptick in the first half of 2020, most likely due to the pandemic.
