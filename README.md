@@ -2,7 +2,7 @@
 
 <img width="750" alt="image" src="https://imgur.com/DpPG33J.png">
 
-Analyzing Elist order trends from 2019-2022. Interactive Tableau dashboard can be found [here](https://public.tableau.com/app/profile/sean.atkinson/viz/ElistOrdersDashboard_16896324404540/ordersdashboard).
+Analyzing Elist order trends from 2019-2022. An interactive Tableau dashboard can be found [here](https://public.tableau.com/app/profile/sean.atkinson/viz/ElistOrdersDashboard_16896324404540/ordersdashboard).
 
 # Table of Contents
 <a id='table_of_contents'></a><br>
@@ -19,7 +19,7 @@ Elist is a sample e-commerce company that sells popular electronics to customers
 
 In this project, I analyzed a dataset to investigate trends and growth rates in revenue, average order value (AOV), product popularity, marketing channels, refund rates, and shipping efficiency. Additionally, I closely examined their recently launched loyalty program to assess its effectiveness in overall sales, AOV, and total orders.
 
-This project has four parts:
+This project consists of four parts:
 - <b>Part 1: Trends</b>
   * Using Excel, I take a high-level look at some of the broad trends within the data to see what notable insights can be pulled out for the finance and product team.
 - <b>Part 2: Targeted Insights</b>
@@ -49,7 +49,7 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 - Interestingly, the first of the pandemic (2020) saw the highest average order value of $298.
 - Total orders are down to 19K in 2022 (from 31k in 2021).
 - Sales are down 44% year-over-year in 2022.
-- The concerning sales numbers of 2022 appear to reflect broader trends in the e-commerce. Factors such as the economic recession, an oversaturated market, decreased effectiveness of marketing campaigns, and supply chain issues were <a href="https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate">identified by Statista</a> as contributors to an unprecedented forecasted shrink in e-commerce revenue for 2022. Particularly notable were changes in digital marketing practices: <a href="https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da">the privacy update in Apple's iOS 14.5, alongside a 47% increase in Facebook advertising costs</a>, seems to have had a profound impact on e-commerce merchants.
+- The concerning sales numbers of 2022 seem to reflect broader trends in the e-commerce industry. Factors such as the economic recession, an oversaturated market, decreased effectiveness of marketing campaigns, and supply chain issues were <a href="https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate">identified by Statista</a> as contributors to an unprecedented forecasted shrink in e-commerce revenue for 2022. Particularly notable were changes in digital marketing practices: <a href="https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da">the privacy update in Apple's iOS 14.5, alongside a 47% increase in Facebook advertising costs</a>, seems to have had a profound impact on e-commerce merchants.
 
 <b>Seasonality</b>
 - Winter and spring tend to perform better, most likely due to holiday sales and special promotions.
@@ -114,10 +114,10 @@ Here is an example of one query result that used the aforementioned qualify clau
 
 <b>Orders</b>
 - Airpods, gaming monitors, and charging packs have accounted for over 80% of all orders from 2019-2022.
-- Every product except webcames saw their total orders peak around the start of the pandemic. Paradoxically, total orders for webcams rose in the following years. This is something we might want to take a closer look at.
+- Every product except webcames saw their total orders peak around the start of the pandemic. Paradoxically, total orders for webcams rose in the following years. This is something we should investigate further.
 
 <b>Shipping times</b>
-- iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One wonders though if this is a chicken and egg situation when taking their sales into account. Are the shipping times for iPhones and Bose headphones all over the place because we rarely sell them (and consequently don't have much stock on hand)? Or do we rarely sell iPhones and Bose headphones because customers find our shipping times to be too unpredictable?  
+- iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. ne might wonder if this is a chicken and egg situation, considering their sales. Are the shipping times for iPhones and Bose headphones all over the place because we rarely sell them (and consequently don't have much stock on hand)? Or do we rarely sell iPhones and Bose headphones because customers find our shipping times to be too unpredictable?  
 
 <b>Sales</b>
 - From 2019-2022, gaming monitors have consistently brought in the most in terms of total sales (outside of a small period at the end of 2020).
@@ -139,10 +139,10 @@ The interactive version of the above Tableau dashboard can be found [here](https
 # Part 4: Recommendations & Next Steps
 [(Back to table of contents)](#table_of_contents)<br><br>
 - Since computer hardware represents such on outsized portion of total sales in terms of dollars, consider looking into if any additional computer hardware can be added to our product assortment.
-- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights in the latter point can give us an idea of what products we might want to look into selling to turn around our declining sales. 
+- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights from the latter point can guide us in identifying products that could help reverse our declining sales. 
 - Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means its better to replace those products with something that might appeal more to our most valuable customer segments. 
 
 <a id='section_6'></a>
 # Addendum: Notes on Data Cleaning
 [(Back to table of contents)](#table_of_contents)<br><br>
-Please note that as a part of the data preprocessing stage, 15,200 entries were identified as duplicates in the initial Excel data. To maintain the accuracy and reliability of the results, these duplicates were removed from the final dataset used for my analysis. Therefore, the original list of entries, which initially consisted of 108,127 entries, was reduced to 92,927 after removing the identified duplicates. This decision was essential to ensure the validity of the insights generated from this project.
+Please note that as a part of the data preprocessing stage, 15,200 entries were identified as duplicates in the initial Excel data. To maintain the accuracy and reliability of the results, these duplicates were removed from the final dataset used for my analysis. Therefore, the original list of entries, which initially consisted of 108,127 entries, was reduced to 92,927 after removing the identified duplicates. This decision was essential to ensure the validity of the insights generated by this project.
