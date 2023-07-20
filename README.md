@@ -121,7 +121,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 - iPhones and Bose headphones have, relative to all other products, incredibly high variability when it comes to shipping times. One might wonder if this is a chicken and egg situation, considering their sales. Are the shipping times for iPhones and Bose headphones all over the place because we rarely sell them (and consequently don't have much stock on hand)? Or do we rarely sell iPhones and Bose headphones because customers find our shipping times to be too unpredictable?  
 
 <b>Sales</b>
-- From 2019-2022, gaming monitors have consistently brought in the most in terms of total sales (outside of a small period at the end of 2020).
+- From 2019-2022, gaming monitors have consistently generated the highest total sales revenue, with the exception of a brief period at the end of 2020.
 - Even though charging packs consistently make up 15-24% of all orders, they’ve never accounted for more than 3% of sales in terms of total dollar value.
 - Apart from Airpods, computer hardware accounts for the majority of our revenue.
 
