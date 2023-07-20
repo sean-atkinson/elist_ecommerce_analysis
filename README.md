@@ -144,4 +144,5 @@ The interactive version of the above Tableau dashboard can be found [here](https
 
 <a id='section_6'></a>
 # Addendum: Notes on Data Cleaning
+[(Back to table of contents)](#table_of_contents)<br><br>
 Please note that as a part of the data preprocessing stage, 15,200 entries were identified as duplicates in the initial Excel data. To maintain the accuracy and reliability of the results, these duplicates were removed from the final dataset used for my analysis. This decision was essential to ensure the validity of the insights generated from this project
