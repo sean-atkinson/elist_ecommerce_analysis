@@ -11,6 +11,7 @@ Analyzing Elist order trends from 2019-2022. Interactive Tableau dashboard can b
 [Part 2: Targeted Insights](#section_3)<br>
 [Part 3: Visualization](#section_4)<br>
 [Part 4: Recommendations & Next Steps](#section_5)<br>
+[Addendum: Notes on Data Cleaning](#section_6)<br>
 
 <a id='section_1'></a>
 # Project Summary
@@ -140,3 +141,7 @@ The interactive version of the above Tableau dashboard can be found [here](https
 - Since computer hardware represents such on outsized portion of total sales in terms of dollars, consider looking into if any additional computer hardware can be added to our product assortment.
 - Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights in the latter point can give us an idea of what products we might want to look into selling to turn around our declining sales. 
 - Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means its better to replace those products with something that might appeal more to our most valuable customer segments. 
+
+<a id='section_6'></a>
+# Addendum: Notes on Data Cleaning
+Please note that as a part of the data preprocessing stage, 15,200 entries were identified as duplicates in the initial Excel data. To maintain the accuracy and reliability of the results, these duplicates were removed from the final dataset used for my analysis. This decision was essential to ensure the validity of the insights generated from this project
