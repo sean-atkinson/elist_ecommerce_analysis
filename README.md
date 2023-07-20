@@ -32,7 +32,7 @@ This project has three parts:
 - <b>Part 4: Recommendations & Next Steps</b>
   * Suggestions on things to take a look at going forward.
 
-The data I'll be using is spread out across four tables and consists of information on orders, order statuses, customers, products, and geographic information.
+The data I'll be using is spread out across four tables and consists of information on orders, order statuses, customers, and geographic information.
 
 Here is the Entity Relationship Diagram:
 
