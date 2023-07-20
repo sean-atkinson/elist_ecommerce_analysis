@@ -58,10 +58,11 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 <b>Products</b>
 - Airpods have consistently been our best-selling product in terms of total orders. 
 - In 2022, Airpods and a gaming monitor made up a whopping 68% of all orders.
-- Bose Soundsport Headphones have consistently done poorly. We've only sold 25 pairs over 3 years.
+- Bose Soundsport Headphones have consistently performed poorly. We've only sold 25 pairs over 3 years.
 
 <b>Loyalty Program</b>
-- We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase.<br>
+- We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase.
+- Additionally, since its inception in 2019, there has been a 22% increase in AOV across all regions as of 2022.<br>
 
 <b>Technical Analysis:</b><br>
 For this section, I used Pivot Tables, conditional formatting, aggregation functions, and statistical analysis to clean, analyze, and summarize my insights for the finance and product teams.
