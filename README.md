@@ -1,4 +1,4 @@
-# Elist E-Commerce Analysis (2019-2022)
+# Elist E-Commerce Analysis: 2019-2022
 
 <img width="750" alt="image" src="https://imgur.com/DpPG33J.png">
 
@@ -19,7 +19,7 @@ Elist is a sample e-commerce company that sells popular electronics to customers
 
 In this project, I analyzed a dataset to investigate trends and growth rates in revenue, average order value (AOV), product popularity, marketing channels, refund rates, and shipping efficiency. Additionally, I closely examined their recently launched loyalty program to assess its effectiveness in overall sales, AOV, and total orders.
 
-This project has three parts:
+This project has four parts:
 - <b>Part 1: Trends</b>
   * Using Excel, I take a high-level look at some of the broad trends within the data to see what notable insights can be pulled out for the finance and product team.
 - <b>Part 2: Targeted Insights</b>
