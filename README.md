@@ -9,7 +9,7 @@ Analyzing Elist order trends from 2019-2022. Interactive Tableau dashboard can b
 [Project Summary](#section_1)<br>
 [Part 1: Trends](#section_2)<br>
 [Part 2: Targeted Insights](#section_3)<br>
-[Part 3: Visualization](#section_4)<br>
+[Part 3: Visualizations](#section_4)<br>
 [Part 4: Recommendations & Next Steps](#section_5)<br>
 [Addendum: Notes on Data Cleaning](#section_6)<br>
 
@@ -26,7 +26,7 @@ This project has three parts:
 
   * With the aid of SQL, I pull out more targeted insights for the finance and marketing team, highlighting things like MacBook sales, refund rates, and best performing marketing channels.
 
-- <b>Part 3: Visualization</b>
+- <b>Part 3: Visualizations</b>
   * A Tableau dashboard created for the finance and product teams (as well as sales and operations to a lesser extent) can monitor metrics of interest on an ongoing basis.
 
 - <b>Part 4: Recommendations & Next Steps</b>
@@ -107,7 +107,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 <img width="750" alt="image" src="https://imgur.com/qxHfD3n.png">
 
 <a id='section_4'></a>
-# Part 3: Visualization (Tableau)
+# Part 3: Visualizations (Tableau)
 [(Back to table of contents)](#table_of_contents)<br><br>
 
 <b>Summary of Insights:</b>
