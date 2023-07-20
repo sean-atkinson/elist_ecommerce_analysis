@@ -45,9 +45,13 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 <b>Summary of Trends</b>:
 
 <b>Yearly</b>
-- Total orders have reached 19K as of 2022.
-- Total orders were down from 31K in 2021.
 - Interestingly, the first of the pandemic (2020) saw the highest average order value of $298.
+- Total orders are down to 19K in 2022 (from 31k in 2021).
+- Sales are down 44% year-over-year in 2022.
+- While the 2022 sales numbers are worrying, they seem to be a reflection of the e-commerce market as a whole. The recession, saturation of the e-commerce space, reduction in marketing campaign effectiveness and supply chain issues have all been <a href="https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate">highlighted by Statista</a> as reasons as to why e-commerce revenue was forecasted to shrink for the first time ever in 2022. With respect to marketing campaign effectiveness specifically, <a href="https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da">Apple's privacy update in iOS 14.5 and the 47% increase in Facebook advertising costs</a> seems to have hit e-commerce merchants especially hard.
+
+
+
   
 <b>Seasonality</b>
 - Winter and spring tend to perform better, most likely due to holiday sales and special promotions.
@@ -137,5 +141,5 @@ The interactive version of the above Tableau dashboard can be found [here](https
 # Part 4: Recommendations & Next Steps
 [(Back to table of contents)](#table_of_contents)<br><br>
 - Since computer hardware represents such on outsized portion of total sales in terms of dollars, consider looking into if any additional computer hardware can be added to our product assortment.
-- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights in the latter point can give us an idea of what products we might want to look into selling to turn around our declining sales.
+- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights in the latter point can give us an idea of what products we might want to look into selling to turn around our declining sales. 
 - Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means its better to replace those products with something that might appeal more to our most valuable customer segments. 
