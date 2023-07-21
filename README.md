@@ -140,7 +140,7 @@ An interactive version of the above Tableau dashboard can be found [here](https:
 # Part 4: Recommendations & Next Steps
 [(Back to table of contents)](#table_of_contents)<br><br>
 - Since computer hardware represents such an outsized portion of total sales in terms of dollars, consider exploring the possibility of adding additional computer hardware to our product assortment.
-- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform bests in terms of gross profits. Insights from the latter point can guide us in identifying products that could help reverse our declining sales. 
+- Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform best in terms of gross profits. Insights from the latter point can guide us in identifying products that could help reverse our declining sales. 
 - Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means it's better to replace those products with something that might appeal more to our most valuable customer segments. 
 
 <a id='section_6'></a>
