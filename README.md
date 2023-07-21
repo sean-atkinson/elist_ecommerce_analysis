@@ -61,8 +61,9 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 - Bose Soundsport Headphones have consistently performed poorly. We've only sold 25 pairs over 3 years.
 
 <b>Loyalty Program</b>
-- We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase.
-- Additionally, since its inception in 2019, there has been a 22% increase in AOV across all regions as of 2022.<br>
+- We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more per purchase. 
+- By the end of 2022, loyalty program members brought in 27% more revenue than non-loyalty program members. This seems to be partly a reflection of how much easier it is to market to them. Since they're loyalty members they're likely receptive to receiving emails from us. Email marketing has a <a href="https://cxl.com/blog/email-marketing-strategy/">47x ROI</a>. Email marketing has not be affected as much as the other channels previously discussed have been.<br>
+
 
 <b>Technical Analysis:</b><br>
 For this section, I used Pivot Tables, conditional formatting, aggregation functions, and statistical analysis to clean, analyze, and summarize my insights for the finance and product teams.
