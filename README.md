@@ -142,7 +142,8 @@ An interactive version of the above Tableau dashboard can be found [here](https:
 [(Back to table of contents)](#table_of_contents)<br><br>
 - Since computer hardware represents such an outsized portion of total sales in terms of dollars, consider exploring the possibility of adding additional computer hardware to our product assortment.
 - Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform best in terms of gross profits. Insights from the latter point can guide us in identifying products that could help reverse our declining sales. 
-- Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means it's better to replace those products with something that might appeal more to our most valuable customer segments. 
+- Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means it's better to replace those products with something that might appeal more to our most valuable customer segments.
+- Think about ways to aggressively expand our loyalty program. Due to the current difficulty of marketing through channels outside of email, it's essential that this becomes a high priority. One retailer whose program we should look at is Altitude Sports. Altitude Sports typically employs a strategy of using very competitive pricing during high sales seasons like Black Friday to attract new potential customers. They then promote their <a href="https://www.altitude-sports.com/products/membership">membership</a> to them by offering it for half price and doubling its discount. Throughout the year, they give members other benefits as well, like member-only discounts and store credits.
 
 <a id='section_6'></a>
 # Addendum: Notes on Data Cleaning
