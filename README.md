@@ -7,9 +7,9 @@ Analyzing Elist order trends from 2019-2022. An interactive Tableau dashboard ca
 # Table of Contents
 <a id='table_of_contents'></a><br>
 [Project Summary](#section_1)<br>
-[Part 1: Trends](#section_2)<br>
-[Part 2: Targeted Insights](#section_3)<br>
-[Part 3: Visualizations](#section_4)<br>
+[Part 1: Trends (Excel)](#section_2)<br>
+[Part 2: Targeted Insights (SQL)](#section_3)<br>
+[Part 3: Visualizations (Tableau)](#section_4)<br>
 [Part 4: Recommendations & Next Steps](#section_5)<br>
 [Addendum: Notes on Data Cleaning](#section_6)<br>
 
