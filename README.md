@@ -38,8 +38,7 @@ Here is the Entity Relationship Diagram:
 
 <img width="750" alt="image" src="https://imgur.com/DyKJM1G.png">
 
-You can view the data in greater detail <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/tree/main/data">here</a>.
-
+You can view the data in greater detail [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/tree/main/data).
 <a id='section_2'></a>
 # Part 1: Trends (Excel)
 [(Back to table of contents)](#table_of_contents)<br><br>
@@ -49,7 +48,7 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 - Interestingly, the first year of the pandemic (2020) saw the highest average order value of $298.
 - Total orders were down to 19K in 2022 (from 31k in 2021).
 - Revenue was down 44% year-over-year in 2022.
--  The concerning sales numbers of 2022 appear to reflect broader trends in the e-commerce industry. Factors such as the economic recession, an oversaturated market, decreased effectiveness of marketing campaigns, and supply chain issues were <a href="https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate">identified by Statista</a> as contributors to an unprecedented forecasted shrink in e-commerce revenue for 2022. Particularly notable were changes in digital marketing practices: <a href="https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da">the privacy update in Apple's iOS 14.5, alongside a 47% increase in Facebook advertising costs</a>, seems to have had a profound impact on e-commerce merchants.
+-  The concerning sales numbers of 2022 appear to reflect broader trends in the e-commerce industry. Factors such as the economic recession, an oversaturated market, decreased effectiveness of marketing campaigns, and supply chain issues were [identified by Statista](https://www.statista.com/chart/27982/e-commerce-revenue-and-forecasts/?ssp=1&setlang=en-CA&safesearch=moderate) as contributors to an unprecedented forecasted shrink in e-commerce revenue for 2022. Particularly notable were changes in digital marketing practices: [the privacy update in Apple's iOS 14.5, alongside a 47% increase in Facebook advertising costs](https://www.forbes.com/sites/forbestechcouncil/2022/03/14/e-commerce-trends-2022-what-the-future-holds/?ssp=1&setlang=en-CA&safesearch=moderate&sh=6ca444d258da), seems to have had a profound impact on e-commerce merchants.
 
 <b>Seasonality</b>
 - Winter and spring tend to perform better, most likely due to holiday sales and special promotions.
@@ -62,7 +61,7 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 
 <b>Loyalty Program</b>
 - We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more than non-members per purchase.
-- By the end of 2022, loyalty program members generated 27% more revenue compared to non-members. This is largely attributed to their higher receptiveness to our marketing efforts. The fact that they are loyalty members makes them more open to receiving emails from us, as demonstrated by spending 217% more than non-members through that channel in 2022. It's worth noting that email marketing boasts a <a href="https://cxl.com/blog/email-marketing-strategy/">47x ROI</a> and has remained relatively unaffected by changes in the marketing landscape.<br>
+- By the end of 2022, loyalty program members generated 27% more revenue compared to non-members. This is largely attributed to their higher receptiveness to our marketing efforts. The fact that they are loyalty members makes them more open to receiving emails from us, as demonstrated by spending 217% more than non-members through that channel in 2022. It's worth noting that email marketing boasts a [47x ROI](https://cxl.com/blog/email-marketing-strategy/) and has remained relatively unaffected by changes in the marketing landscape.<br>
 
 
 <b>Technical Analysis:</b><br>
@@ -72,7 +71,7 @@ Here is an example of the pivot table used for seasonality insights:
 
 <img width="750" alt="image" src="https://imgur.com/MUw8TKL.png">
 
-You can find more detailed analysis in <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx">this downloadable Excel workbook</a>.
+You can find more detailed analysis in [this downloadable Excel workbook](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx).
 
 <a id='section_3'></a>
 # Part 2: Targeted Insights (SQL)
@@ -102,7 +101,7 @@ You can find more detailed analysis in <a href="https://github.com/sean-atkinson
 <b>Technical Analysis:</b><br>
 For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, common table expressions (CTEs), and in a couple instances  the QUALIFY clause to use row_number() to filter results.
 
-You can find my SQL queries <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_sales_trends_queries.sql">here</a>.
+You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_sales_trends_queries.sql).
 
 Here is an example of one query result that used the aforementioned qualify clause. It's the result of a query that first creates a brand category and totals the amount of refunds per month for each brand, filtering for the year 2020. After that it returns the month with the most refunds and its corresponding number of refunds:
 
@@ -129,7 +128,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 <b>Technical Analysis:</b><br>
 In this section, I primarily used Tableau. SQL and BigQuery were also used to create a dataset for Tableau. My Tableau dashboard incorporates filters, tables, line graphs, and area charts.
 
-You can find the SQL code for the dataset I created in BigQuery <a href="https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_dataset_tableau_query.sql">here</a>.
+You can find the SQL code for the dataset I created in BigQuery [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_dataset_tableau_query.sql).
 
 Here is a peek of what the Tableau dashboard for this part of my analysis looks like:
 
@@ -145,7 +144,7 @@ A copy of my Tableau workbook can be found [here](https://github.com/sean-atkins
 - Since computer hardware represents such an outsized portion of total sales in terms of dollars, consider exploring the possibility of adding additional computer hardware to our product assortment.
 - Incorporate customer acquisition costs and wholesale or costs of goods sold into analysis to get an understanding of customer lifetime value and what products perform best in terms of net profits. Insights from the latter point can guide us in identifying products that could help reverse our declining sales. 
 - Investigate why shipping times are so volatile for iPhones and Bose headphones. Additionally, consider if the volatility, combined with poor sales numbers, means it's better to replace those products with something that might appeal more to our most valuable customer segments.
-- Think about ways to aggressively expand our loyalty program. Due to the current difficulty of marketing through channels outside of email, it's essential that this becomes a high priority. One retailer whose program we should look at is Altitude Sports. Altitude Sports typically employs a strategy of using very competitive pricing during high sales seasons like Black Friday to attract new potential customers. They then promote their <a href="https://www.altitude-sports.com/products/membership">membership</a> to them by offering it for half price and doubling its discount for a limited time period. Additionally, throughout the year, they give members other benefits like member-only discounts and store credits to encourage them to spend money during non-peak seasons.
+- Think about ways to aggressively expand our loyalty program. Due to the current difficulty of marketing through channels outside of email, it's essential that this becomes a high priority. One retailer whose program we should look at is Altitude Sports. Altitude Sports typically employs a strategy of using very competitive pricing during high sales seasons like Black Friday to attract new potential customers. They then promote their [membership](https://www.altitude-sports.com/products/membership) to them by offering it for half price and doubling its discount for a limited time period. Additionally, throughout the year, they give members other benefits like member-only discounts and store credits to encourage them to spend money during non-peak seasons.
 
 <a id='section_6'></a>
 # Addendum: Notes on Data Cleaning
