@@ -137,6 +137,8 @@ Here is a peek of what the Tableau dashboard for this part of my analysis looks 
 
 An interactive version of the above Tableau dashboard can be found [here](https://public.tableau.com/app/profile/sean.atkinson/viz/ElistOrdersDashboard_16896324404540/ordersdashboard).
 
+A copy of my Tableau workbook can be found [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/tree/main/tableau).
+
 <a id='section_5'></a>
 # Part 4: Recommendations & Next Steps
 [(Back to table of contents)](#table_of_contents)<br><br>
