@@ -62,7 +62,7 @@ You can view the data in greater detail <a href="https://github.com/sean-atkinso
 
 <b>Loyalty Program</b>
 - We recommend continuing to expand this. When the program started in 2019, members were spending an average of $29 less than non-members. In 2022, loyalty program members now spend an average of $34 more than non-members per purchase.
-- By the end of 2022, loyalty program members generated 27% more revenue compared to non-members. This increase in revenue is largely attributed to their higher receptiveness to our marketing efforts. The fact that they are loyalty members makes them more open to receiving emails from us, as demonstrated by their 148% higher spending than non-members through that channel in 2022. It's worth noting that email marketing boasts a <a href="https://cxl.com/blog/email-marketing-strategy/">47x ROI</a> and has remained relatively unaffected by changes in the marketing landscape.<br>
+- By the end of 2022, loyalty program members generated 27% more revenue compared to non-members. This is partly attributed to their higher receptiveness to our marketing efforts. The fact that they are loyalty members makes them more open to receiving emails from us, as demonstrated by their 148% higher spending than non-members through that channel in 2022. It's worth noting that email marketing boasts a <a href="https://cxl.com/blog/email-marketing-strategy/">47x ROI</a> and has remained relatively unaffected by changes in the marketing landscape.<br>
 
 
 <b>Technical Analysis:</b><br>
