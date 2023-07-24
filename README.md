@@ -36,7 +36,7 @@ The data I'll be using is spread out across four tables and consists of informat
 
 Here is the Entity Relationship Diagram:
 
-<img width="750" alt="image" src="https://imgur.com/DyKJM1G.png">
+<img width="750" alt="image" src="https://imgur.com/HVIQcvg.png">
 
 You can view the data in greater detail [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/tree/main/data).
 <a id='section_2'></a>
@@ -69,7 +69,7 @@ For this section, I used Pivot Tables, conditional formatting, aggregation funct
 
 Here is an example of the pivot table used for seasonality insights:
 
-<img width="750" alt="image" src="https://imgur.com/MUw8TKL.png">
+<img width="750" alt="image" src="https://imgur.com/Xhg7kmc.png">
 
 You can find more detailed analysis in [this downloadable Excel workbook](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx).
 
