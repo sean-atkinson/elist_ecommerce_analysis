@@ -36,7 +36,7 @@ The data I'll be using is spread out across four tables and consists of informat
 
 Here is the Entity Relationship Diagram:
 
-<img width="750" alt="image" src="https://imgur.com/HVIQcvg.png">
+<img width="750" alt="image" src="https://imgur.com/L3Fh37t.png">
 
 You can view the data in greater detail [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/tree/main/data).
 <a id='section_2'></a>
