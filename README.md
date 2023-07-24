@@ -27,7 +27,7 @@ This project consists of four parts:
   * With the aid of SQL, I pull out more targeted insights for the finance and marketing team, highlighting things like MacBook sales, refund rates, and best performing marketing channels.
 
 - <b>Part 3: Visualizations</b>
-  * A Tableau dashboard created for the finance and product teams (as well as sales and operations to a lesser extent) to monitor metrics of interest on an ongoing basis.
+  * Leveraging Tableau, I create a dashboard for the finance and product teams (as well as the sales and operations teams to a lesser extent) to monitor metrics of interest on an ongoing basis.
 
 - <b>Part 4: Recommendations & Next Steps</b>
   * Suggestions on things to take a look at going forward.
