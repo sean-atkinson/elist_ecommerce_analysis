@@ -1,6 +1,6 @@
 # Elist E-Commerce Analysis: 2019-2022
 
-<img width="750" alt="image" src="https://imgur.com/DpPG33J.png">
+<img width="750" alt="Tableau dashboard showing tables, line graphs, and area charts for total sales, total orders, and average time to ship" src="https://imgur.com/DpPG33J.png">
 
 Analyzing Elist order trends from 2019-2022. An interactive Tableau dashboard can be found [here](https://public.tableau.com/app/profile/sean.atkinson/viz/ElistOrdersDashboard_16896324404540/ordersdashboard).
 
@@ -36,7 +36,7 @@ The data I'll be using is spread out across four tables and consists of informat
 
 Here is the Entity Relationship Diagram:
 
-<img width="750" alt="image" src="https://imgur.com/L3Fh37t.png">
+<img width="750" alt="Entity Relationship Diagram showing orders, order statuses, customers, and geographic information tables" src="https://imgur.com/L3Fh37t.png">
 
 You can view the data in greater detail [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/tree/main/data).
 <a id='section_2'></a>
@@ -69,7 +69,7 @@ For this section, I used Pivot Tables, conditional formatting, aggregation funct
 
 Here is an example of the pivot table used for seasonality insights:
 
-<img width="750" alt="image" src="https://imgur.com/Xhg7kmc.png">
+<img width="750" alt="Excel pivot table showing totals and growth rates for monthly sales, AOV, and orders" src="https://imgur.com/Xhg7kmc.png">
 
 You can find more detailed analysis in [this downloadable Excel workbook](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx).
 
@@ -105,7 +105,7 @@ You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecomme
 
 Here is an example of one query result that used the aforementioned qualify clause. It's the result of a query that first creates a brand category and totals the amount of refunds per month for each brand, filtering for the year 2020. After that it returns the month with the most refunds and its corresponding number of refunds:
 
-<img width="750" alt="image" src="https://imgur.com/qxHfD3n.png">
+<img width="750" alt="SQL query result" src="https://imgur.com/qxHfD3n.png">
 
 <a id='section_4'></a>
 # Part 3: Visualizations (Tableau)
@@ -132,7 +132,7 @@ You can find the SQL code for the dataset I created in BigQuery [here](https://g
 
 Here is a peek of what the Tableau dashboard for this part of my analysis looks like:
 
-<img width="750" alt="image" src="https://imgur.com/DpPG33J.png">
+<img width="750" alt="Tableau dashboard showing tables, line graphs, and area charts for total sales, total orders, and average time to ship" src="https://imgur.com/DpPG33J.png">
 
 An interactive version of the above Tableau dashboard can be found [here](https://public.tableau.com/app/profile/sean.atkinson/viz/ElistOrdersDashboard_16896324404540/ordersdashboard).
 
