@@ -101,7 +101,7 @@ You can find more detailed analysis in [this downloadable Excel workbook](https:
 <b>Technical Analysis:</b><br>
 For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, common table expressions (CTEs), and in a couple instances  the QUALIFY clause to use row_number() to filter results.
 
-You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_sales_trends_queries.sql).
+You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql/elist_sales_trends_queries.sql).
 
 Here is an example of one query result that used the aforementioned qualify clause. It's the result of a query that first creates a brand category and totals the amount of refunds per month for each brand, filtering for the year 2020. After that it returns the month with the most refunds and its corresponding number of refunds:
 
@@ -128,7 +128,7 @@ Here is an example of one query result that used the aforementioned qualify clau
 <b>Technical Analysis:</b><br>
 In this section, I primarily used Tableau. SQL and BigQuery were also used to create a dataset for Tableau. My Tableau dashboard incorporates filters, tables, line graphs, and area charts.
 
-You can find the SQL code for the dataset I created in BigQuery [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql_queries/elist_dataset_tableau_query.sql).
+You can find the SQL code for the dataset I created in BigQuery [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql/elist_dataset_tableau_query.sql).
 
 Here is a peek of what the Tableau dashboard for this part of my analysis looks like:
 
