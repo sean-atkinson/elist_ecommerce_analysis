@@ -1,12 +1,12 @@
---selecting all columns from the 4 elist datsets
---cleaning product names and creating two additional columns (time to ship and time to purchase)
-select orders.customer_id,
-  orders.id as order_id,
+-- selecting all columns from the 4 elist datasets
+-- cleaning product names and creating two additional columns (time to ship and time to purchase)
+SELECT orders.customer_id,
+  orders.id AS order_id,
   orders.purchase_ts,
   orders.product_id,
-  case when lower(orders.product_name) like '%gaming monitor%' then '27in 4K Gaming Monitor'
-    when lower(orders.product_name) like 'bose soundsport headphones' then 'Bose Soundsport Headphones'
-    else orders.product_name end as product_name_clean,
+  CASE WHEN LOWER(orders.product_name) LIKE '%gaming monitor%' THEN '27in 4K Gaming Monitor'
+    WHEN LOWER(orders.product_name) LIKE 'bose soundsport headphones' THEN 'Bose Soundsport Headphones'
+    ELSE orders.product_name END AS product_name_clean,
   orders.currency,
   orders.local_price,
   orders.usd_price,
@@ -20,12 +20,12 @@ select orders.customer_id,
   order_status.ship_ts,
   order_status.delivery_ts,
   order_status.refund_ts,
-  date_diff(order_status.ship_ts, order_status.purchase_ts, day) as time_to_ship_days,
-  date_diff(order_status.purchase_ts, customers.created_on, day) as time_to_purchase_days
-from `elist-390902.elist.orders` orders 
-left join `elist-390902.elist.customers` customers 
-  on orders.customer_id = customers.id
-left join `elist-390902.elist.geo_lookup` geo_lookup 
-  on customers.country_code = geo_lookup.country
-left join `elist-390902.elist.order_status` order_status 
-  on orders.id = order_status.order_id
+  DATE_DIFF(order_status.ship_ts, order_status.purchase_ts, DAY) AS time_to_ship_days,
+  DATE_DIFF(order_status.purchase_ts, customers.created_on, DAY) AS time_to_purchase_days
+FROM `elist-390902.elist.orders` orders 
+LEFT JOIN `elist-390902.elist.customers` customers 
+  ON orders.customer_id = customers.id
+LEFT JOIN `elist-390902.elist.geo_lookup` geo_lookup 
+  ON customers.country_code = geo_lookup.country
+LEFT JOIN `elist-390902.elist.order_status` order_status 
+  ON orders.id = order_status.order_id;
