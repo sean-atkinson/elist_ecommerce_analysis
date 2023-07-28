@@ -1,276 +1,314 @@
---for each month, calculating main sales metrics: order count, total sales, and aov
---filtering to only north america and macbooks
---rounding numbers for readability
-with sales_trends_monthly_cte as (
-  select date_trunc(orders.purchase_ts, month) as purchase_month,
-    geo_lookup.region as region,
-    count(orders.id) as total_orders,
-    round(sum(orders.usd_price),2) as total_sales,
-    round(avg(orders.usd_price), 2) as avg_sales
-  from elist.orders orders
-  join elist.customers customers
-    on orders.customer_id = customers.id
-  join elist.geo_lookup geo_lookup
-    on customers.country_code = geo_lookup.country
-  where region = 'NA' and lower(orders.product_name) like '%macbook%'
-  group by 1,2)
----monthly trends across all years
-select round(avg(total_orders)) as avg_total_orders,
-  round(avg(total_sales)) as avg_monthly_sales,
-  round(avg(avg_sales)) as avg_price
-from sales_trends_monthly_cte;
+-- for each month, calculating main sales metrics: order count, total sales, and aov
+-- filtering to only north america and macbooks
+-- rounding numbers for readability
+WITH sales_trends_monthly_cte AS (
+    SELECT DATE_TRUNC(orders.purchase_ts, MONTH) AS purchase_month,
+        COUNT(orders.id) AS total_orders,
+        ROUND(SUM(orders.usd_price),2) AS total_sales,
+        ROUND(AVG(orders.usd_price), 2) AS avg_sales
+    FROM elist.orders AS orders
+    JOIN elist.customers AS customers 
+	ON orders.customer_id = customers.id
+    JOIN elist.geo_lookup AS geo_lookup 
+	ON customers.country_code = geo_lookup.country
+    WHERE geo_lookup.region = 'NA' 
+        AND LOWER(orders.product_name) LIKE '%macbook%'
+    GROUP BY 1
+)
+SELECT ROUND(AVG(total_orders)) AS avg_total_orders,
+    ROUND(AVG(total_sales)) AS avg_monthly_sales,
+    ROUND(AVG(avg_sales)) AS avg_price
+FROM sales_trends_monthly_cte;
 
---for each quarter, calculating main sales metrics: order count, total sales, and aov
---filtering to only north america and macbooks
---round numbers for readability
-with sales_trends_quarterly_cte as (
-  select date_trunc(orders.purchase_ts, quarter) as purchase_quarter,
-    geo_lookup.region as region,
-    count(orders.id) as total_orders,
-    round(sum(orders.usd_price),2) as total_sales,
-    round(avg(orders.usd_price), 2) as avg_sales
-  from elist.orders orders
-  join elist.customers customers
-    on orders.customer_id = customers.id
-  join elist.geo_lookup geo_lookup
-    on customers.country_code = geo_lookup.country
-  where region = 'NA' and lower(orders.product_name) like '%macbook%'
-  group by 1,2)
----quarterly trends across all years
-select round(avg(total_orders)) as avg_total_orders,
-  round(avg(total_sales)) as avg_quarterly_sales,
-  round(avg(avg_sales)) as avg_price
-from sales_trends_quarterly_cte;
+-- for each quarter, calculating main sales metrics: order count, total sales, and aov
+-- filtering to only north america and macbooks
+-- rounding  numbers for readability
+WITH sales_trends_quarterly_cte AS (
+    SELECT DATE_TRUNC(orders.purchase_ts, QUARTER) AS purchase_quarter,
+        COUNT(orders.id) AS total_orders,
+        ROUND(SUM(orders.usd_price),2) AS total_sales,
+        ROUND(AVG(orders.usd_price), 2) AS avg_sales
+    FROM elist.orders AS orders
+    JOIN elist.customers AS customers 
+	ON orders.customer_id = customers.id
+    JOIN elist.geo_lookup AS geo_lookup 
+	ON customers.country_code = geo_lookup.country
+    WHERE geo_lookup.region = 'NA' 
+        AND LOWER(orders.product_name) LIKE '%macbook%'
+    GROUP BY 1
+)
+SELECT ROUND(AVG(total_orders)) AS avg_total_orders,
+    ROUND(AVG(total_sales)) AS avg_quarterly_sales,
+    ROUND(AVG(avg_sales)) AS avg_price
+FROM sales_trends_quarterly_cte;
 
 --counting the number of refunds per month (non-null values in refund_ts represent refunds)
---calculting the refund rate
-with monthly_refunds_cte as (
-  select date_trunc(purchase_ts, month) as month,
-    sum(case when refund_ts is not null then 1 else 0 end) as refunds,
-    sum(case when refund_ts is not null then 1 else 0 end)/count(distinct order_id) as refund_rate
-from elist.order_status order_status
-group by 1
-order by 1)
---calculating the monthly refund rate for 2020
-select round(avg(refund_rate),3) as monthly_refunds
-from monthly_refunds_cte
-where extract(year from month) = 2020;
+-- calculting the refund rate
+WITH monthly_refunds_cte AS (
+  SELECT DATE_TRUNC(purchase_ts, MONTH) AS month,
+    SUM(CASE WHEN refund_ts IS NOT NULL THEN 1 ELSE 0 END) AS refunds,
+    SUM(CASE WHEN refund_ts IS NOT NULL THEN 1 ELSE 0 END) / COUNT(DISTINCT order_id) AS refund_rate
+  FROM elist.order_status 
+  WHERE EXTRACT(YEAR FROM purchase_ts) = 2020
+  GROUP BY 1
+  ORDER BY 1
+)
+SELECT ROUND(AVG(refund_rate),3) AS monthly_refunds
+FROM monthly_refunds_cte;
+
 
 --calcultating the number of refunds per month (non-null values in refund_ts represent refunds)
 --filtering for 2021 and apple products
-select date_trunc(order_status.refund_ts, month) as month,
-    sum(case when order_status.refund_ts is not null then 1 else 0 end) as refunds,
-from `elist-390902.elist.order_status` order_status
-join `elist-390902.elist.orders` orders
-    on order_status.order_id = orders.id
-where extract(year from order_status.refund_ts) = 2021
-    and (lower(orders.product_name) like '%apple%' or
-    	lower(orders.product_name) like '%macbook%')
-group by 1
-order by 1;
+SELECT DATE_TRUNC(order_status.refund_ts, MONTH) AS month,
+    COUNT(order_status.refund_ts) AS refunds
+FROM elist.order_status AS order_status
+JOIN elist.orders AS orders ON order_status.order_id = orders.id
+WHERE EXTRACT(YEAR FROM order_status.refund_ts) = 2021
+    AND (LOWER(orders.product_name) LIKE '%apple%' 
+        OR LOWER(orders.product_name) LIKE '%macbook%')
+GROUP BY 1
+ORDER BY 1;
 
---cleaning up product names
---calculating refund rates for each product
-with refunds_cte as (
-    select case when product_name ='27in"" 4k gaming monitor' then '27in 4K gaming monitor' else product_name end as product_name_clean,
-        sum(case when order_status.refund_ts is not null then 1 else 0 end) as refunds,
-        round(sum(case when order_status.refund_ts is not null then 1 else 0 end)/count(distinct orders.id),3) as refund_rate,
-    from elist.orders orders
-    left join elist.order_status order_status
-        on orders.id = order_status.order_id
-    group by 1)
---highlighting the 3 products with the highest refund rate
-select product_name_clean, refund_rate
-from refunds_cte
-order by 2 desc
-limit 3;
 
-with refunds_cte as (
-    select case when product_name ='27in"" 4k gaming monitor' then '27in 4K gaming monitor' else product_name end as product_name_clean,
-        sum(case when order_status.refund_ts is not null then 1 else 0 end) as refunds,
-        round(sum(case when order_status.refund_ts is not null then 1 else 0 end)/count(distinct orders.id),3) as refund_rate,
-    from elist.orders orders
-    left join elist.order_status order_status
-        on orders.id = order_status.order_id
-    group by 1)
---highlighting the 3 products with the highest count of total refunds
-select product_name_clean, refunds
-from refunds_cte
-order by 2 desc
-limit 3;
-
---finding aov and new customers by account_creation_method for accounts created in the first 2 months of 2022 
-with account_creation_method_cte as (
-  select customers.account_creation_method as account_creation_method, 
-    round(avg(usd_price),2) as aov, 
-    count(distinct customers.id) as new_customers
-  from elist.customers customers
-  join elist.orders orders 
-    on customers.id = orders.customer_id
-  where extract(year from customers.created_on) = 2022 and extract(month from customers.created_on) in (1,2)
-  group by 1)
---aov
-select account_creation_method, aov
-from account_creation_method_cte
-order by 2 desc;
-
-with account_creation_method_cte as (
-  select customers.account_creation_method as account_creation_method, 
-    round(avg(usd_price),2) as aov, 
-    count(distinct customers.id) as new_customers
-  from elist.customers customers
-  join elist.orders orders 
-    on customers.id = orders.customer_id
-  where extract(year from customers.created_on) = 2022 and extract(month from customers.created_on) in (1,2)
-  group by 1)
---total new customers
-select account_creation_method, new_customers
-from account_creation_method_cte
-order by 2 desc;
-
---avg amount of time between customer registration and initial purchase
---averaging the amount of days to purchase for all customers
-with initial_order_cte as (
-	select orders.customer_id as customer_id, min(purchase_ts) as initial_order
-	from elist.orders orders
-	group by 1 
+-- cleaning up product names
+-- calculating refund rates for each product
+WITH refunds_cte AS (
+    SELECT 
+        CASE 
+            WHEN product_name ='27in"" 4k gaming monitor' THEN '27in 4K gaming monitor' 
+            ELSE product_name 
+        END AS product_name_clean,
+        COUNT(order_status.refund_ts) AS refunds,
+        ROUND(COUNT(order_status.refund_ts) / COUNT(DISTINCT orders.id), 3) AS refund_rate
+    FROM elist.orders AS orders
+    LEFT JOIN elist.order_status AS order_status ON orders.id = order_status.order_id
+    GROUP BY 1
 )
-select round(avg(date_diff(initial_order_cte.initial_order, customers.created_on, day)),2) as days_to_purchase
-from elist.customers customers
-join initial_order_cte
-	on customers.id = initial_order_cte.customer_id
+-- highlighting the 3 products with the highest refund rate
+SELECT product_name_clean, 
+    refund_rate
+FROM refunds_cte
+ORDER BY 3 DESC
+LIMIT 3;
 
---avg time between customer registration and all orders made by customers
---averaging the amount of days to purchase for all customers
-with time_to_order_cte as (
-	select orders.customer_id, 
-		orders.purchase_ts,
-		customers.created_on,
-		date_diff(orders.purchase_ts, customers.created_on, day) as days_to_purchase
-	from elist.customers customers
-	left join elist.orders orders
-		on customers.id = orders.customer_id
-		)
-select round(avg(days_to_purchase),1) as avg_days_to_purchase
-from time_to_order_cte
 
---calculating total sales, aov, and total orders per region to determine which marketing channel performs best
---ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
-with top_marketing_channel_cte as (
-  select geo_lookup.region as region,
-    customers.marketing_channel as marketing_channel, 
-    round(sum(orders.usd_price),2) as total_sales,
-    round(avg(orders.usd_price),2) as aov,
-    count(distinct orders.id) as total_orders,
-    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
-    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
-    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
-  from elist.customers customers
-  join elist.orders orders 
-    on customers.id = orders.customer_id
-  join elist.geo_lookup geo_lookup 
-    on customers.country_code = geo_lookup.country
-  group by 1, 2
-  )
---finding out which marketing channel performs best in terms of total sales
---note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
-select region, marketing_channel, total_sales 
-from top_marketing_channel_cte
-where total_sales_rank = 1
-order by 3 desc;
-
---calculating total sales, aov, and total orders per region to determine which marketing channel performs best
---ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
-with top_marketing_channel_cte as (
-  select geo_lookup.region as region,
-    customers.marketing_channel as marketing_channel, 
-    round(sum(orders.usd_price),2) as total_sales,
-    round(avg(orders.usd_price),2) as aov,
-    count(distinct orders.id) as total_orders,
-    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
-    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
-    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
-  from elist.customers customers
-  join elist.orders orders 
-    on customers.id = orders.customer_id
-  join elist.geo_lookup geo_lookup 
-    on customers.country_code = geo_lookup.country
-  group by 1, 2
-  )
---finding out which marketing channel performs best in terms of aov
-select region, marketing_channel, aov 
-from top_marketing_channel_cte
-where aov_rank = 1
-order by 3 desc;
-
---calculating total sales, aov, and total orders per region to determine which marketing channel performs best
---ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
-with top_marketing_channel_cte as (
-  select geo_lookup.region as region,
-    customers.marketing_channel as marketing_channel, 
-    round(sum(orders.usd_price),2) as total_sales,
-    round(avg(orders.usd_price),2) as aov,
-    count(distinct orders.id) as total_orders,
-    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
-    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
-    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank,
-  from elist.customers customers
-  join elist.orders orders 
-    on customers.id = orders.customer_id
-  join elist.geo_lookup geo_lookup 
-    on customers.country_code = geo_lookup.country
-  group by 1, 2
-  )
---finding which marketing channel performs best in terms of total orders
---note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
-select region, marketing_channel, total_orders  
-from top_marketing_channel_cte
-where total_orders_rank = 1
-order by 3 desc;
-
---looking for customers with more than 4 purchases
-with loyal_customers_cte as (
-  select orders.customer_id as customer_id, 
-  count(distinct orders.id) as total_orders
-from elist.orders orders 
-group by 1
-having count(distinct orders.id) > 4
+-- cleaning up product names
+-- calculating refund rates for each product
+WITH refunds_cte AS (
+    SELECT 
+        CASE 
+            WHEN product_name ='27in"" 4k gaming monitor' THEN '27in 4K gaming monitor' 
+            ELSE product_name 
+        END AS product_name_clean,
+        COUNT(order_status.refund_ts) AS refunds,
+        ROUND(COUNT(order_status.refund_ts) / COUNT(DISTINCT orders.id), 3) AS refund_rate
+    FROM elist.orders AS orders
+    LEFT JOIN elist.order_status AS order_status ON orders.id = order_status.order_id
+    GROUP BY 1
 )
---to see the most recent order of loyal customers, do a join with loyal_customers_cte
---ranking their orders by most recent first
---qualify statement allows us to limit results to their most recent order
-select orders.customer_id as customer_id, 
-  orders.id as order_id, 
-  orders.product_name as product_name, 
-  date(orders.purchase_ts) as purchase_date,
-  row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) as rank
-from elist.orders orders
-join loyal_customers_cte loyal_customers
-on orders.customer_id = loyal_customers.customer_id
-qualify row_number()over (partition by orders.customer_id order by orders.purchase_ts desc) = 1
+-- highlighting the 3 products with the highest count of total refunds
+SELECT product_name_clean, 
+    refunds
+FROM refunds_cte
+ORDER BY 2 DESC
+LIMIT 3;
 
 
---creating a brand category and totalling the amount of refunds per month
---filtering to the year 2020
-with highest_num_refunds_cte as (
-  select case
-          when lower(orders.product_name) like '%apple%' or lower(orders.product_name) like '%macbook%' then 'Apple'
-          when lower(orders.product_name) like '%samsung%' then 'Samsung'
-          when lower(orders.product_name) like '%thinkpad%' then 'ThinkPad'
-          when lower(orders.product_name) like '%bose%' then 'Bose'
-          else 'Unknown'
-        end as brand,
-        date_trunc(order_status.refund_ts, month) as month,
-        count(order_status.refund_ts) as num_refunds
-  from elist.orders orders 
-  join elist.order_status order_status 
-    on orders.id = order_status.order_id
-  where extract(year from order_status.refund_ts) = 2020
-  group by 1,2)
---getting the high month and corresponding number of refunds for each brand in 2020 
-select brand, 
+-- finding AOV and new customers by account_creation_method for accounts created in the first 2 months of 2022 
+WITH account_creation_method_cte AS (
+    SELECT customers.account_creation_method AS account_creation_method, 
+        ROUND(AVG(usd_price), 2) AS aov, 
+        COUNT(DISTINCT customers.id) AS new_customers
+    FROM elist.customers customers
+    JOIN elist.orders orders 
+	ON customers.id = orders.customer_id
+    WHERE EXTRACT(YEAR FROM customers.created_on) = 2022 
+        AND EXTRACT(MONTH FROM customers.created_on) IN (1, 2)
+    GROUP BY 1
+)
+-- comparing AOV for each account creation method
+SELECT account_creation_method, 
+    aov
+FROM account_creation_method_cte
+ORDER BY 2 DESC;
+
+-- finding AOV and new customers by account_creation_method for accounts created in the first 2 months of 2022 
+WITH account_creation_method_cte AS (
+    SELECT customers.account_creation_method AS account_creation_method, 
+        ROUND(AVG(usd_price), 2) AS aov, 
+        COUNT(DISTINCT customers.id) AS new_customers
+    FROM elist.customers customers
+    JOIN elist.orders orders ON customers.id = orders.customer_id
+    WHERE EXTRACT(YEAR FROM customers.created_on) = 2022 
+        AND EXTRACT(MONTH FROM customers.created_on) IN (1, 2)
+    GROUP BY 
+        1
+)
+-- comparing total new customers for each account creation method
+SELECT 
+    account_creation_method, 
+    new_customers
+FROM 
+    account_creation_method_cte
+ORDER BY 
+    new_customers DESC;
+
+
+-- avg amount of time between customer registration and initial purchase
+-- averaging the amount of days to purchase for all customers
+WITH initial_order_cte AS (
+    SELECT orders.customer_id AS customer_id, 
+        MIN(purchase_ts) AS initial_order
+    FROM elist.orders orders
+    GROUP BY 1 
+)
+SELECT ROUND(AVG(DATE_DIFF(initial_order_cte.initial_order, customers.created_on, DAY)), 2) AS days_to_purchase
+FROM elist.customers customers
+JOIN initial_order_cte 
+	ON customers.id = initial_order_cte.customer_id;
+
+-- avg time between customer registration and all orders made by customers
+-- averaging the amount of days to purchase for all customers
+WITH time_to_order_cte AS (
+    SELECT orders.customer_id, 
+        orders.purchase_ts,
+        customers.created_on,
+        DATE_DIFF(orders.purchase_ts, customers.created_on, DAY) AS days_to_purchase
+    FROM elist.customers customers
+    LEFT JOIN elist.orders orders 
+	ON customers.id = orders.customer_id
+)
+SELECT ROUND(AVG(days_to_purchase), 1) AS avg_days_to_purchase
+FROM time_to_order_cte;
+
+-- calculating total sales, aov, and total orders per region to determine which marketing channel performs best
+-- ranking channels by total sales, aov, and total orders since what performs best depends on the metric you're trying to maximize for
+-- CALCULATING TOTAL SALES, AOV, AND TOTAL ORDERS PER REGION TO DETERMINE WHICH MARKETING CHANNEL PERFORMS BEST
+-- RANKING CHANNELS BY TOTAL SALES, AOV, AND TOTAL ORDERS SINCE WHAT PERFORMS BEST DEPENDS ON THE METRIC YOU'RE TRYING TO MAXIMIZE FOR
+WITH top_marketing_channel_cte AS (
+  SELECT geo_lookup.region as region,
+    customers.marketing_channel as marketing_channel, 
+    sum(orders.usd_price) as total_sales,
+    avg(orders.usd_price) as aov,
+    count(distinct orders.id) as total_orders,
+    row_number() over (partition by geo_lookup.region order by sum(orders.usd_price) desc) as total_sales_rank,
+    row_number() over (partition by geo_lookup.region order by avg(orders.usd_price) desc) as aov_rank,
+    row_number() over (partition by geo_lookup.region order by count(distinct orders.id) desc) as total_orders_rank
+  FROM elist.customers customers
+  JOIN elist.orders orders 
+    ON customers.id = orders.customer_id
+  JOIN elist.geo_lookup geo_lookup 
+    ON customers.country_code = geo_lookup.country
+  GROUP BY 1, 2
+)
+-- finding out which marketing channel performs best in terms of total sales
+-- note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+SELECT region,
+  marketing_channel,
+  ROUND(total_sales, 2) AS total_sales,
+  ROUND(aov, 2) AS aov,
+  total_orders
+FROM top_marketing_channel_cte
+WHERE total_sales_rank = 1
+ORDER BY 3 DESC;
+
+-- calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
+-- ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+WITH top_marketing_channel_cte AS (
+  SELECT
+    geo_lookup.region AS region,
+    customers.marketing_channel AS marketing_channel, 
+    ROUND(SUM(orders.usd_price), 2) AS total_sales,
+    ROUND(AVG(orders.usd_price), 2) AS aov,
+    COUNT(DISTINCT orders.id) AS total_orders,
+    ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY SUM(orders.usd_price) DESC) AS total_sales_rank,
+    ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY AVG(orders.usd_price) DESC) AS aov_rank,
+    ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY COUNT(DISTINCT orders.id) DESC) AS total_orders_rank
+  FROM elist.customers customers
+  JOIN elist.orders orders 
+    ON customers.id = orders.customer_id
+  JOIN elist.geo_lookup geo_lookup 
+    ON customers.country_code = geo_lookup.country
+  GROUP BY 1, 2
+)
+-- finding out which marketing channel performs best in terms of AOV
+SELECT region, marketing_channel, aov 
+FROM top_marketing_channel_cte
+WHERE aov_rank = 1
+ORDER BY 3 DESC;
+
+
+-- calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
+-- ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+WITH top_marketing_channel_cte AS (
+  SELECT
+    geo_lookup.region AS region,
+    customers.marketing_channel AS marketing_channel, 
+    ROUND(SUM(orders.usd_price), 2) AS total_sales,
+    ROUND(AVG(orders.usd_price), 2) AS aov,
+    COUNT(DISTINCT orders.id) AS total_orders,
+    ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY SUM(orders.usd_price) DESC) AS total_sales_rank,
+    ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY AVG(orders.usd_price) DESC) AS aov_rank,
+    ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY COUNT(DISTINCT orders.id) DESC) AS total_orders_rank
+  FROM elist.customers customers
+  JOIN elist.orders orders 
+    ON customers.id = orders.customer_id
+  JOIN elist.geo_lookup geo_lookup 
+    ON customers.country_code = geo_lookup.country
+  GROUP BY 1, 2
+)
+-- finding which marketing channel performs best in terms of total orders
+-- note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+SELECT region, marketing_channel, total_orders  
+FROM top_marketing_channel_cte
+WHERE total_orders_rank = 1
+ORDER BY 3 DESC;
+
+-- looking for customers with more than 4 purchases
+WITH loyal_customers_cte AS (
+  SELECT
+    orders.customer_id AS customer_id, 
+    COUNT(DISTINCT orders.id) AS total_orders
+  FROM elist.orders orders 
+  GROUP BY 1
+  HAVING COUNT(DISTINCT orders.id) > 4
+)
+-- to see the most recent order of loyal customers, doing a join with loyal_customers_cte
+SELECT
+  orders.customer_id AS customer_id, 
+  orders.id AS order_id, 
+  orders.product_name AS product_name, 
+  DATE(orders.purchase_ts) AS purchase_date,
+  ROW_NUMBER() OVER (PARTITION BY orders.customer_id ORDER BY orders.purchase_ts DESC) AS rank
+FROM elist.orders orders
+JOIN loyal_customers_cte loyal_customers
+  ON orders.customer_id = loyal_customers.customer_id
+WHERE rank = 1;
+
+-- creating a brand category and totaling the amount of refunds per month
+-- filtering to the year 2020
+WITH highest_num_refunds_cte AS (
+  SELECT
+    CASE
+      WHEN LOWER(orders.product_name) LIKE '%apple%' OR LOWER(orders.product_name) LIKE '%macbook%' THEN 'Apple'
+      WHEN LOWER(orders.product_name) LIKE '%samsung%' THEN 'Samsung'
+      WHEN LOWER(orders.product_name) LIKE '%thinkpad%' THEN 'ThinkPad'
+      WHEN LOWER(orders.product_name) LIKE '%bose%' THEN 'Bose'
+      ELSE 'Unknown'
+    END AS brand,
+    DATE_TRUNC(order_status.refund_ts, MONTH) AS month,
+    COUNT(order_status.refund_ts) AS num_refunds
+  FROM elist.orders orders 
+  JOIN elist.order_status order_status 
+    ON orders.id = order_status.order_id
+  WHERE EXTRACT(YEAR FROM order_status.refund_ts) = 2020
+  GROUP BY 1, 2
+)
+-- getting the highest month and corresponding number of refunds for each brand in 2020 
+SELECT
+  brand, 
   month, 
   num_refunds
-from highest_num_refunds_cte
-qualify row_number() over (partition by brand order by num_refunds desc) = 1
-order by 1
+FROM highest_num_refunds_cte
+QUALIFY ROW_NUMBER() OVER (PARTITION BY brand ORDER BY num_refunds DESC) = 1
+ORDER BY 1;
