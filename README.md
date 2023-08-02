@@ -69,7 +69,7 @@ For this section, I used Pivot Tables, conditional formatting, aggregation funct
 
 Here is an example of the pivot table used for seasonality insights:
 
-<img width="750" alt="Excel pivot table showing totals and growth rates for monthly sales, AOV, and orders" src="https://imgur.com/Xhg7kmc.png">
+<img width="750" alt="Excel pivot table showing totals and growth rates for monthly sales, AOV, and orders" src="https://imgur.com/Uns8sPD.png">
 
 You can find more detailed analysis in [this downloadable Excel workbook](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/excel/elist_orders_case_study.xlsx).
 
