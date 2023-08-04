@@ -10,9 +10,13 @@ WITH sales_trends_monthly_cte AS (
     FROM 
         elist.orders AS orders
     JOIN 
-        elist.customers AS customers ON orders.customer_id = customers.id
+        elist.customers AS customers 
+    ON 
+        orders.customer_id = customers.id
     JOIN 
-        elist.geo_lookup AS geo_lookup ON customers.country_code = geo_lookup.country
+        elist.geo_lookup AS geo_lookup 
+    ON 
+        customers.country_code = geo_lookup.country
     WHERE 
         geo_lookup.region = 'NA' AND LOWER(orders.product_name) LIKE '%macbook%'
     GROUP BY 
@@ -37,9 +41,13 @@ WITH sales_trends_quarterly_cte AS (
     FROM 
         elist.orders AS orders
     JOIN 
-        elist.customers AS customers ON orders.customer_id = customers.id
+        elist.customers AS customers 
+    ON 
+        orders.customer_id = customers.id
     JOIN 
-        elist.geo_lookup AS geo_lookup ON customers.country_code = geo_lookup.country
+        elist.geo_lookup AS geo_lookup 
+    ON 
+        customers.country_code = geo_lookup.country
     WHERE 
         geo_lookup.region = 'NA' AND LOWER(orders.product_name) LIKE '%macbook%'
     GROUP BY 
@@ -81,7 +89,9 @@ SELECT
 FROM 
     elist.order_status AS order_status
 JOIN 
-    elist.orders AS orders ON order_status.order_id = orders.id
+    elist.orders AS orders 
+ON 
+    order_status.order_id = orders.id
 WHERE 
     EXTRACT(YEAR FROM order_status.refund_ts) = 2021 AND (LOWER(orders.product_name) LIKE '%apple%' OR LOWER(orders.product_name) LIKE '%macbook%')
 GROUP BY 
@@ -102,7 +112,9 @@ WITH refunds_cte AS (
     FROM 
         elist.orders AS orders
     LEFT JOIN 
-        elist.order_status AS order_status ON orders.id = order_status.order_id
+        elist.order_status AS order_status 
+    ON 
+        orders.id = order_status.order_id
     GROUP BY 
         1
 )
@@ -130,7 +142,9 @@ WITH refunds_cte AS (
     FROM 
         elist.orders AS orders
     LEFT JOIN 
-        elist.order_status AS order_status ON orders.id = order_status.order_id
+        elist.order_status AS order_status 
+    ON 
+        orders.id = order_status.order_id
     GROUP BY 
         1
 )
@@ -152,9 +166,11 @@ WITH account_creation_method_cte AS (
         ROUND(AVG(usd_price), 2) AS aov, 
         COUNT(DISTINCT customers.id) AS new_customers
     FROM 
-        elist.customers customers
-    JOIN 
-        elist.orders orders ON customers.id = orders.customer_id
+        elist.customers AS customers
+    INNER JOIN 
+        elist.orders AS orders 
+    ON 
+        customers.id = orders.customer_id
     WHERE 
         EXTRACT(YEAR FROM customers.created_on) = 2022 AND EXTRACT(MONTH FROM customers.created_on) IN (1, 2)
     GROUP BY 
@@ -176,9 +192,11 @@ WITH account_creation_method_cte AS (
         ROUND(AVG(usd_price), 2) AS aov, 
         COUNT(DISTINCT customers.id) AS new_customers
     FROM 
-        elist.customers customers
-    JOIN 
-        elist.orders orders ON customers.id = orders.customer_id
+        elist.customers AS customers
+    INNER JOIN 
+        elist.orders AS orders 
+    ON 
+        customers.id = orders.customer_id
     WHERE 
         EXTRACT(YEAR FROM customers.created_on) = 2022 AND EXTRACT(MONTH FROM customers.created_on) IN (1, 2)
     GROUP BY 
@@ -200,16 +218,18 @@ WITH initial_order_cte AS (
         orders.customer_id AS customer_id, 
         MIN(purchase_ts) AS initial_order
     FROM 
-        elist.orders orders
+        elist.orders AS orders
     GROUP BY 
         1 
 )
 SELECT 
     ROUND(AVG(DATE_DIFF(initial_order_cte.initial_order, customers.created_on, DAY)), 2) AS days_to_purchase
 FROM 
-    elist.customers customers
-JOIN 
-    initial_order_cte ON customers.id = initial_order_cte.customer_id;
+    elist.customers AS customers
+INNER JOIN 
+    initial_order_cte 
+ON 
+    customers.id = initial_order_cte.customer_id;
 
 -- Avg time between customer registration and all orders made by customers
 -- Averaging the amount of days to purchase for all customers
@@ -220,9 +240,11 @@ WITH time_to_order_cte AS (
         customers.created_on,
         DATE_DIFF(orders.purchase_ts, customers.created_on, DAY) AS days_to_purchase
     FROM 
-        elist.customers customers
+        elist.customers AS customers
     LEFT JOIN 
-        elist.orders orders ON customers.id = orders.customer_id
+        elist.orders AS orders 
+    ON 
+        customers.id = orders.customer_id
 )
 SELECT 
     ROUND(AVG(days_to_purchase), 1) AS avg_days_to_purchase
@@ -233,20 +255,24 @@ FROM
 -- Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
 WITH top_marketing_channel_cte AS (
     SELECT 
-        geo_lookup.region as region,
-        customers.marketing_channel as marketing_channel, 
-        SUM(orders.usd_price) as total_sales,
-        AVG(orders.usd_price) as aov,
-        COUNT(DISTINCT orders.id) as total_orders,
-        ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY SUM(orders.usd_price) DESC) as total_sales_rank,
-        ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY AVG(orders.usd_price) DESC) as aov_rank,
-        ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY COUNT(DISTINCT orders.id) DESC) as total_orders_rank
+        geo_lookup.region AS region,
+        customers.marketing_channel AS marketing_channel, 
+        SUM(orders.usd_price) AS total_sales,
+        AVG(orders.usd_price) AS aov,
+        COUNT(DISTINCT orders.id) AS total_orders,
+        ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY SUM(orders.usd_price) DESC) AS total_sales_rank,
+        ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY AVG(orders.usd_price) DESC) AS aov_rank,
+        ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY COUNT(DISTINCT orders.id) DESC) AS total_orders_rank
     FROM 
-        elist.customers customers
+        elist.customers AS customers
     JOIN 
-        elist.orders orders ON customers.id = orders.customer_id
+        elist.orders AS orders 
+    ON 
+        customers.id = orders.customer_id
     JOIN 
-        elist.geo_lookup geo_lookup ON customers.country_code = geo_lookup.country
+        elist.geo_lookup AS geo_lookup 
+    ON 
+        customers.country_code = geo_lookup.country
     GROUP BY 
         1, 2
 )
@@ -278,11 +304,15 @@ WITH top_marketing_channel_cte AS (
         ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY AVG(orders.usd_price) DESC) AS aov_rank,
         ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY COUNT(DISTINCT orders.id) DESC) AS total_orders_rank
     FROM 
-        elist.customers customers
+        elist.customers AS customers
     JOIN 
-        elist.orders orders ON customers.id = orders.customer_id
+        elist.orders AS orders 
+    ON 
+        customers.id = orders.customer_id
     JOIN 
-        elist.geo_lookup geo_lookup ON customers.country_code = geo_lookup.country
+        elist.geo_lookup AS geo_lookup 
+    ON 
+        customers.country_code = geo_lookup.country
     GROUP BY 
         1, 2
 )
@@ -311,11 +341,15 @@ WITH top_marketing_channel_cte AS (
         ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY AVG(orders.usd_price) DESC) AS aov_rank,
         ROW_NUMBER() OVER (PARTITION BY geo_lookup.region ORDER BY COUNT(DISTINCT orders.id) DESC) AS total_orders_rank
     FROM 
-        elist.customers customers
+        elist.customers AS customers
     JOIN 
-        elist.orders orders ON customers.id = orders.customer_id
+        elist.orders AS orders 
+    ON 
+        customers.id = orders.customer_id
     JOIN 
-        elist.geo_lookup geo_lookup ON customers.country_code = geo_lookup.country
+        elist.geo_lookup AS geo_lookup 
+    ON 
+        customers.country_code = geo_lookup.country
     GROUP BY 
         1, 2
 )
@@ -338,7 +372,7 @@ WITH loyal_customers_cte AS (
         orders.customer_id AS customer_id, 
         COUNT(DISTINCT orders.id) AS total_orders
     FROM 
-        elist.orders orders 
+        elist.orders AS orders 
     GROUP BY 
         1
     HAVING 
@@ -352,9 +386,11 @@ SELECT
     DATE(orders.purchase_ts) AS purchase_date,
     ROW_NUMBER() OVER (PARTITION BY orders.customer_id ORDER BY orders.purchase_ts DESC) AS rank
 FROM 
-    elist.orders orders
+    elist.orders AS orders
 JOIN 
-    loyal_customers_cte loyal_customers ON orders.customer_id = loyal_customers.customer_id
+    loyal_customers_cte AS loyal_customers 
+ON 
+    orders.customer_id = loyal_customers.customer_id
 WHERE 
     rank = 1;
 
@@ -372,9 +408,11 @@ WITH highest_num_refunds_cte AS (
         DATE_TRUNC(order_status.refund_ts, MONTH) AS month,
         COUNT(order_status.refund_ts) AS num_refunds
     FROM 
-        elist.orders orders 
+        elist.orders AS orders 
     JOIN 
-        elist.order_status order_status ON orders.id = order_status.order_id
+        elist.order_status AS order_status 
+    ON 
+        orders.id = order_status.order_id
     WHERE 
         EXTRACT(YEAR FROM order_status.refund_ts) = 2020
     GROUP BY 
