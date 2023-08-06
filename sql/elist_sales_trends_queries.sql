@@ -81,19 +81,20 @@ SELECT
 FROM 
     monthly_refunds_cte;
 
--- Calculating the number of refunds per month (non-null values in refund_ts represent refunds)
--- Filtering for 2021 and Apple products
+-- Counting the number of refunds, filtered to 2021 
+-- Only including Apple products, using lowercase to account for any differences in capitalization
 SELECT 
-    DATE_TRUNC(order_status.refund_ts, MONTH) AS month,
-    COUNT(order_status.refund_ts) AS refunds
+    DATE_TRUNC(order_status.refund_ts, month) AS month,
+    SUM(CASE WHEN order_status.refund_ts IS NOT NULL THEN 1 ELSE 0 END) AS refunds
 FROM 
-    elist.order_status AS order_status
-JOIN 
-    elist.orders AS orders 
+    `elist-390902.elist.orders` orders
+LEFT JOIN 
+    `elist-390902.elist.order_status` order_status
 ON 
-    order_status.order_id = orders.id
+    orders.id = order_status.order_id
 WHERE 
-    EXTRACT(YEAR FROM order_status.refund_ts) = 2021 AND (LOWER(orders.product_name) LIKE '%apple%' OR LOWER(orders.product_name) LIKE '%macbook%')
+    EXTRACT(YEAR FROM order_status.refund_ts) = 2021
+    AND (LOWER(orders.product_name) LIKE '%apple%' OR LOWER(orders.product_name) LIKE '%macbook%')
 GROUP BY 
     1
 ORDER BY 
@@ -125,7 +126,7 @@ SELECT
 FROM 
     refunds_cte
 ORDER BY 
-    3 DESC
+    2 DESC
 LIMIT 
     3;
 
