@@ -104,8 +104,14 @@ For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregatio
 You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql/elist_sales_trends_queries.sql).
 
 Here is an example of one query result that used the aforementioned qualify clause. It's the result of a query that first creates a brand category and totals the amount of refunds per month for each brand, filtering for the year 2020. After that it returns the month with the most refunds and its corresponding number of refunds:
+| brand    | month      |   num_refunds |
+|:---------|:-----------|--------------:|
+| Apple    | 2020-06-01 |            56 |
+| Samsung  | 2020-04-01 |             7 |
+| ThinkPad | 2020-04-01 |             9 |
+| Unknown  | 2020-05-01 |            25 |
 
-<img width="750" alt="SQL query result" src="https://imgur.com/qxHfD3n.png">
+
 
 <a id='section_4'></a>
 # Part 3: Visualizations (Tableau)
