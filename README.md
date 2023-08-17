@@ -103,7 +103,45 @@ For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregatio
 
 You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql/elist_sales_trends_queries.sql).
 
-Here is an example of one query result that used the aforementioned qualify clause. It's the result of a query that first creates a brand category and totals the amount of refunds per month for each brand, filtering for the year 2020. After that it returns the month with the most refunds and its corresponding number of refunds:
+Here is an example of a query result that uses the aforementioned qualify clause:
+```sql
+-- Creating a brand category and totaling the amount of refunds per month
+-- Filtering to the year 2020
+WITH highest_num_refunds_cte AS (
+    SELECT
+        CASE
+            WHEN LOWER(orders.product_name) LIKE '%apple%' OR LOWER(orders.product_name) LIKE '%macbook%' THEN 'Apple'
+            WHEN LOWER(orders.product_name) LIKE '%samsung%' THEN 'Samsung'
+            WHEN LOWER(orders.product_name) LIKE '%thinkpad%' THEN 'ThinkPad'
+            WHEN LOWER(orders.product_name) LIKE '%bose%' THEN 'Bose'
+            ELSE 'Unknown'
+        END AS brand,
+        DATE_TRUNC(order_status.refund_ts, MONTH) AS month,
+        COUNT(order_status.refund_ts) AS num_refunds
+    FROM 
+        elist.orders AS orders 
+    JOIN 
+        elist.order_status AS order_status 
+    ON 
+        orders.id = order_status.order_id
+    WHERE 
+        EXTRACT(YEAR FROM order_status.refund_ts) = 2020
+    GROUP BY 
+        1, 2
+)
+-- Getting the highest month and corresponding number of refunds for each brand in 2020 
+SELECT
+    brand, 
+    month, 
+    num_refunds
+FROM 
+    highest_num_refunds_cte
+QUALIFY 
+    ROW_NUMBER() OVER (PARTITION BY brand ORDER BY num_refunds DESC) = 1
+ORDER BY 
+    1;
+```
+And here is its result:
 | brand    | month      |   num_refunds |
 |:---------|:-----------|--------------:|
 | Apple    | 2020-06-01 |            56 |
