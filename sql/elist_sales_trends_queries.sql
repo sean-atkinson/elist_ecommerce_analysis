@@ -1,6 +1,8 @@
--- For each month, calculating main sales metrics: order count, total sales, and aov
--- Filtering to only North America and MacBooks
--- Rounding numbers for readability
+/* 
+For each month, calculating main sales metrics: order count, total sales, and aov
+Filtering to only North America and MacBooks
+Rounding numbers for readability
+*/
 WITH sales_trends_monthly_cte AS (
     SELECT 
         DATE_TRUNC(orders.purchase_ts, MONTH) AS purchase_month,
@@ -29,9 +31,11 @@ SELECT
 FROM 
     sales_trends_monthly_cte;
 
--- For each quarter, calculating main sales metrics: order count, total sales, and aov
--- Filtering to only North America and MacBooks
--- Rounding numbers for readability
+/* 
+For each quarter, calculating main sales metrics: order count, total sales, and aov
+Filtering to only North America and MacBooks
+Rounding numbers for readability
+*/
 WITH sales_trends_quarterly_cte AS (
     SELECT 
         DATE_TRUNC(orders.purchase_ts, QUARTER) AS purchase_quarter,
@@ -60,8 +64,10 @@ SELECT
 FROM 
     sales_trends_quarterly_cte;
 
--- Counting the number of refunds per month (non-null values in refund_ts represent refunds)
--- Calculating the refund rate
+/*
+Counting the number of refunds per month (non-null values in refund_ts represent refunds)
+Calculating the refund rate
+*/
 WITH monthly_refunds_cte AS (
     SELECT 
         DATE_TRUNC(purchase_ts, MONTH) AS month,
@@ -81,8 +87,10 @@ SELECT
 FROM 
     monthly_refunds_cte;
 
--- Counting the number of refunds, filtered to 2021 
--- Only including Apple products, using lowercase to account for any differences in capitalization
+/*
+Counting the number of refunds, filtered to 2021 
+Only including Apple products, using lowercase to account for any differences in capitalization
+*/
 SELECT 
     DATE_TRUNC(order_status.refund_ts, month) AS month,
     SUM(CASE WHEN order_status.refund_ts IS NOT NULL THEN 1 ELSE 0 END) AS refunds
@@ -100,8 +108,7 @@ GROUP BY
 ORDER BY 
     1;
 
--- Cleaning up product names
--- Calculating refund rates for each product
+-- Cleaning up product names and calculating refund rates for each product
 WITH refunds_cte AS (
     SELECT 
         CASE 
@@ -130,8 +137,7 @@ ORDER BY
 LIMIT 
     3;
 
--- Cleaning up product names
--- Calculating refund rates for each product
+-- Cleaning up product names and calculating refund rates for each product
 WITH refunds_cte AS (
     SELECT 
         CASE 
@@ -212,8 +218,10 @@ FROM
 ORDER BY 
     new_customers DESC;
 
--- Avg amount of time between customer registration and initial purchase
--- Averaging the amount of days to purchase for all customers
+/*
+Avg amount of time between customer registration and initial purchase
+Averaging the amount of days to purchase for all customers
+*/
 WITH initial_order_cte AS (
     SELECT 
         orders.customer_id AS customer_id, 
@@ -232,8 +240,10 @@ INNER JOIN
 ON 
     customers.id = initial_order_cte.customer_id;
 
--- Avg time between customer registration and all orders made by customers
--- Averaging the amount of days to purchase for all customers
+/*
+Avg time between customer registration and all orders made by customers
+Averaging the amount of days to purchase for all customers
+*/
 WITH time_to_order_cte AS (
     SELECT 
         orders.customer_id, 
@@ -252,8 +262,10 @@ SELECT
 FROM 
     time_to_order_cte;
 
--- Calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
--- Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+/*
+Calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
+Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+*/
 WITH top_marketing_channel_cte AS (
     SELECT 
         geo_lookup.region AS region,
@@ -277,8 +289,10 @@ WITH top_marketing_channel_cte AS (
     GROUP BY 
         1, 2
 )
--- Finding out which marketing channel performs best in terms of total sales
--- Note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+/*
+Finding out which marketing channel performs best in terms of total sales
+Note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+*/
 SELECT 
     region,
     marketing_channel,
@@ -292,8 +306,10 @@ WHERE
 ORDER BY 
     3 DESC;
 
--- Calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
--- Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+/*
+Calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
+Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+*/
 WITH top_marketing_channel_cte AS (
     SELECT
         geo_lookup.region AS region,
@@ -329,8 +345,10 @@ WHERE
 ORDER BY 
     3 DESC;
 
--- Calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
--- Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+/*
+Calculating total sales, AOV, and total orders per region to determine which marketing channel performs best
+Ranking channels by total sales, AOV, and total orders since what performs best depends on the metric you're trying to maximize for
+*/
 WITH top_marketing_channel_cte AS (
     SELECT
         geo_lookup.region AS region,
@@ -354,8 +372,10 @@ WITH top_marketing_channel_cte AS (
     GROUP BY 
         1, 2
 )
--- Finding which marketing channel performs best in terms of total orders
--- Note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+/*
+Finding which marketing channel performs best in terms of total orders
+Note since the top ranking is direct, which isn't a marketing channel, in this instance you're better off looking for what's ranked #2
+*/
 SELECT 
     region, 
     marketing_channel, 
@@ -395,8 +415,10 @@ ON
 WHERE 
     rank = 1;
 
--- Creating a brand category and totaling the amount of refunds per month
--- Filtering to the year 2020
+/*
+Creating a brand category and totaling the amount of refunds per month
+Filtering to the year 2020
+*/
 WITH highest_num_refunds_cte AS (
     SELECT
         CASE
