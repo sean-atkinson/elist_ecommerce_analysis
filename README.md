@@ -99,7 +99,7 @@ You can find more detailed analysis in [this downloadable Excel workbook](https:
 - Emails - second highest number of orders.
 
 <b>Technical Analysis:</b><br>
-For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, common table expressions (CTEs), and in a couple instances the QUALIFY clause to use row_number() to filter results.
+For this analysis, I used SQL and BigQuery. In regards to SQL, I used aggregation functions, window functions, joins, filtering, CASE expressions, common table expressions (CTEs), and in a couple instances the QUALIFY clause to use row_number() to filter results.
 
 You can find my SQL queries [here](https://github.com/sean-atkinson/elist_ecommerce_analysis/blob/main/sql/elist_sales_trends_queries.sql).
 
